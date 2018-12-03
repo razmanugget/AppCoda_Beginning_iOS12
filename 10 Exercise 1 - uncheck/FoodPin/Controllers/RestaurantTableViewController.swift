@@ -65,12 +65,32 @@ class RestaurantTableViewController: UITableViewController {
     let callAction = UIAlertAction(title: "Call " + "123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
     optionMenu.addAction(callAction)
     
+    // switch title based on checkmark
+    var checkTitle = "Check-in"
+    let cellTemp = tableView.cellForRow(at: indexPath)
+    if cellTemp?.accessoryType == .checkmark {
+      checkTitle = "Remove check-in"
+    } else {
+      checkTitle = "Check-in"
+    }
+    
     // check-in action (closure is in-line (preferred usage))
-    let checkInAction = UIAlertAction(title: "Check in", style: .default, handler: {(action: UIAlertAction!) -> Void in
+    let checkInAction = UIAlertAction(title: checkTitle, style: .default, handler: {(action: UIAlertAction!) -> Void in
       
       let cell = tableView.cellForRow(at: indexPath)
-      cell?.accessoryType = .checkmark
-      self.restaurantIsVisited[indexPath.row] = true
+      
+      if cell?.accessoryType == .checkmark {
+        cell!.accessoryType = .none
+        self.restaurantIsVisited[indexPath.row] = false
+      } else {
+        cell!.accessoryType = .checkmark
+        self.restaurantIsVisited[indexPath.row] = true
+      }
+
+      
+//      cell?.accessoryType = .checkmark
+//      print("after pressing\(cell!)")
+//      self.restaurantIsVisited[indexPath.row] = true
     })
     optionMenu.addAction(checkInAction)
     
