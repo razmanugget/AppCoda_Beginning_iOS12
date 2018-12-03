@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F40C7E2F21B2EEC50074D929 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40C7E2E21B2EEC50074D929 /* AppDelegate.swift */; };
-		F40C7E3121B2EEC50074D929 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40C7E3021B2EEC50074D929 /* ViewController.swift */; };
 		F40C7E3421B2EEC50074D929 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40C7E3221B2EEC50074D929 /* Main.storyboard */; };
 		F40C7E3621B2EEC70074D929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F40C7E3521B2EEC70074D929 /* Assets.xcassets */; };
 		F40C7E3921B2EEC70074D929 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40C7E3721B2EEC70074D929 /* LaunchScreen.storyboard */; };

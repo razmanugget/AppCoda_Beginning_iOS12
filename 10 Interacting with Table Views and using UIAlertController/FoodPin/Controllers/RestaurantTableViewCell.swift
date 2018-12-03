@@ -15,8 +15,7 @@ class RestaurantTableViewCell: UITableViewCell {
   @IBOutlet weak var typeLabel: UILabel!
   @IBOutlet weak var thumbnailImageView: UIImageView!
   
-  
-  override func awakeFromNib() {
+   override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
