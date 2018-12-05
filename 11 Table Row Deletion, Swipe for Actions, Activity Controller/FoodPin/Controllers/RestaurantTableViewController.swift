@@ -55,17 +55,16 @@ class RestaurantTableViewController: UITableViewController {
   
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
     // create an option menu as an action sheet
     let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
     
+    // fix for iPad
     if let popoverController = optionMenu.popoverPresentationController {
       if let cell = tableView.cellForRow(at: indexPath) {
         popoverController.sourceView = cell
         popoverController.sourceRect = cell.bounds
       }
     }
-    
     
     // add actions to the menu
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -80,7 +79,6 @@ class RestaurantTableViewController: UITableViewController {
     
     let callAction = UIAlertAction(title: "Call " + "123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
     optionMenu.addAction(callAction)
-    
     
     // switch title based on checkmark
     let checkActionTitle = (restaurantIsVisited[indexPath.row]) ? "Undo Check in" : "Check in"
@@ -100,15 +98,69 @@ class RestaurantTableViewController: UITableViewController {
     // display the menu
     present(optionMenu, animated: true, completion: nil)
     
-    
     // deselect the row
     tableView.deselectRow(at: indexPath, animated: false)
   }
   
   
-  //  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-  //    <#code#>
-  //  }
+  override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {(action, sourceView, completionHandler) in
+      // delete the row from the data source
+      self.restaurantNames.remove(at: indexPath.row)
+      self.restaurantLocations.remove(at: indexPath.row)
+      self.restaurantTypes.remove(at: indexPath.row)
+      self.restaurantIsVisited.remove(at: indexPath.row)
+      self.restaurantImages.remove(at: indexPath.row)
+      self.tableView.deleteRows(at: [indexPath], with: .fade)
+      
+      // call completion handler to dismiss the action button
+      completionHandler(true)
+    }
+    
+    let shareAction = UIContextualAction(style: .normal, title: "Share") {(action, sourceView, completionHandler) in
+      let defaultText = "Just checking in at " + self.restaurantNames[indexPath.row]
+      let activityController: UIActivityViewController
+      if let imageToShare = UIImage(named: self.restaurantImages[indexPath.row]) {
+        activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+      } else {
+        activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+      }
+      
+      // fix for iPad
+      if let popoverController = activityController.popoverPresentationController {
+        if let cell = tableView.cellForRow(at: indexPath) {
+          popoverController.sourceView = cell
+          popoverController.sourceRect = cell.bounds
+        }
+      }
+    
+      self.present(activityController, animated: true, completion: nil)
+      completionHandler(true)
+    }
+    
+    // color the options
+    deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)   // specific color
+    deleteAction.image = UIImage(named: "delete")
+    shareAction.backgroundColor = UIColor.orange   // simple color
+    shareAction.image = UIImage(named: "share")
+    
+    // show the options
+    let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+    return swipeConfiguration
+  }
+  
+  // use this if you want a swipe to perform just 1 action
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//      if editingStyle == .delete {
+//        // delete the row from the data source
+//        restaurantNames.remove(at: indexPath.row)
+//        restaurantLocations.remove(at: indexPath.row)
+//        restaurantTypes.remove(at: indexPath.row)
+//        restaurantIsVisited.remove(at: indexPath.row)
+//        restaurantImages.remove(at: indexPath.row)
+//      }
+//      tableView.deleteRows(at: [indexPath], with: .fade)
+//    }
   
   
   override func viewDidLoad() {
