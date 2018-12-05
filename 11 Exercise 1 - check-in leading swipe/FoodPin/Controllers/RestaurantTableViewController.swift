@@ -149,18 +149,32 @@ class RestaurantTableViewController: UITableViewController {
     return swipeConfiguration
   }
   
-  // use this if you want a swipe to perform just 1 action
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//      if editingStyle == .delete {
-//        // delete the row from the data source
-//        restaurantNames.remove(at: indexPath.row)
-//        restaurantLocations.remove(at: indexPath.row)
-//        restaurantTypes.remove(at: indexPath.row)
-//        restaurantIsVisited.remove(at: indexPath.row)
-//        restaurantImages.remove(at: indexPath.row)
-//      }
-//      tableView.deleteRows(at: [indexPath], with: .fade)
-//    }
+  
+  
+  override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let checkInAction = UIContextualAction(style: .normal, title: "Check In") {(action, sourceView, completionHandler) in
+      // check-in
+      let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+      self.restaurantIsVisited[indexPath.row] = (self.restaurantIsVisited[indexPath.row]) ? false : true
+      cell.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row] ? false : true
+      
+      // call completion handler to dismiss the action button
+      completionHandler(true)
+    }
+    
+    // color the options
+    checkInAction.backgroundColor = UIColor(red: 29.0/255.0, green: 124.0/255.0, blue: 60.0/255.0, alpha: 1.0)   // specific color
+    if self.restaurantIsVisited[indexPath.row] == false {
+      checkInAction.image = UIImage(named: "tick")
+    } else {
+      checkInAction.image = UIImage(named: "undo")
+    }
+    
+    // show the options
+    let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkInAction])
+    return swipeConfiguration
+  }
+  
   
   
   override func viewDidLoad() {
