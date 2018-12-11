@@ -54,50 +54,6 @@ class RestaurantTableViewController: UITableViewController {
   }
   
   
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    // create an option menu as an action sheet
-    let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
-    
-    // fix for iPad
-    if let popoverController = optionMenu.popoverPresentationController {
-      if let cell = tableView.cellForRow(at: indexPath) {
-        popoverController.sourceView = cell
-        popoverController.sourceRect = cell.bounds
-      }
-    }
-    
-    // add actions to the menu
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    optionMenu.addAction(cancelAction)
-    
-    // add call action
-    let callActionHandler = {(action: UIAlertAction!) -> Void in
-      let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .alert)
-      alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-      self.present(alertMessage, animated: true, completion: nil)
-    }
-    let callAction = UIAlertAction(title: "Call " + "123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
-    optionMenu.addAction(callAction)
-    
-    // switch title based on checkmark
-    let checkActionTitle = (restaurantIsVisited[indexPath.row]) ? "Undo Check in" : "Check in"
-    
-    // check-in action (closure is in-line (preferred usage))
-    let checkInAction = UIAlertAction(title: checkActionTitle, style: .default, handler: {(action: UIAlertAction!) -> Void in
-      let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-      self.restaurantIsVisited[indexPath.row] = (self.restaurantIsVisited[indexPath.row]) ? false : true
-      cell.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row] ? false : true
-    })
-    optionMenu.addAction(checkInAction)
-    
-    // display the menu
-    present(optionMenu, animated: true, completion: nil)
-    
-    // deselect the row
-    tableView.deselectRow(at: indexPath, animated: false)
-  }
-  
-  
   override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {(action, sourceView, completionHandler) in
       // delete the row from the data source
@@ -169,8 +125,20 @@ class RestaurantTableViewController: UITableViewController {
   }
   
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "showRestaurantDetail" {
+      if let indexPath = tableView.indexPathForSelectedRow {
+        let destinationController = segue.destination as! RestaurantDetailViewController
+        destinationController.restaurantImageName = restaurantImages[indexPath.row]
+      }
+    }
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    navigationController?.navigationBar.prefersLargeTitles = true
     
     // adjust width on iPad only
     tableView.cellLayoutMarginsFollowReadableWidth = true
