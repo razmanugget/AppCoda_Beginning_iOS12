@@ -76,7 +76,6 @@ class RestaurantTableViewController: UITableViewController {
       alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
       self.present(alertMessage, animated: true, completion: nil)
     }
-    
     let callAction = UIAlertAction(title: "Call " + "123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
     optionMenu.addAction(callAction)
     
@@ -85,14 +84,10 @@ class RestaurantTableViewController: UITableViewController {
     
     // check-in action (closure is in-line (preferred usage))
     let checkInAction = UIAlertAction(title: checkActionTitle, style: .default, handler: {(action: UIAlertAction!) -> Void in
-      
       let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-      
       self.restaurantIsVisited[indexPath.row] = (self.restaurantIsVisited[indexPath.row]) ? false : true
-      
       cell.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row] ? false : true
     })
-    
     optionMenu.addAction(checkInAction)
     
     // display the menu
@@ -133,7 +128,6 @@ class RestaurantTableViewController: UITableViewController {
           popoverController.sourceRect = cell.bounds
         }
       }
-    
       self.present(activityController, animated: true, completion: nil)
       completionHandler(true)
     }
@@ -149,18 +143,30 @@ class RestaurantTableViewController: UITableViewController {
     return swipeConfiguration
   }
   
-  // use this if you want a swipe to perform just 1 action
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//      if editingStyle == .delete {
-//        // delete the row from the data source
-//        restaurantNames.remove(at: indexPath.row)
-//        restaurantLocations.remove(at: indexPath.row)
-//        restaurantTypes.remove(at: indexPath.row)
-//        restaurantIsVisited.remove(at: indexPath.row)
-//        restaurantImages.remove(at: indexPath.row)
-//      }
-//      tableView.deleteRows(at: [indexPath], with: .fade)
-//    }
+  
+  override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let checkInAction = UIContextualAction(style: .normal, title: "Check In") {(action, sourceView, completionHandler) in
+      // check-in
+      let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+      self.restaurantIsVisited[indexPath.row] = (self.restaurantIsVisited[indexPath.row]) ? false : true
+      cell.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row] ? false : true
+      
+      // call completion handler to dismiss the action button
+      completionHandler(true)
+    }
+    
+    // color the options
+    checkInAction.backgroundColor = UIColor(red: 29.0/255.0, green: 124.0/255.0, blue: 60.0/255.0, alpha: 1.0)   // specific color
+    if self.restaurantIsVisited[indexPath.row] == false {
+      checkInAction.image = UIImage(named: "tick")
+    } else {
+      checkInAction.image = UIImage(named: "undo")
+    }
+    
+    // show the options
+    let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkInAction])
+    return swipeConfiguration
+  }
   
   
   override func viewDidLoad() {
