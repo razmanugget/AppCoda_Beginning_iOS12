@@ -9,12 +9,9 @@
 import UIKit
 
 class RestaurantDetailViewController: UIViewController {
-  // MARK: - Variables
-  var restaurantImagePassedIn = ""
-  var restaurantNamePassedIn = ""
-  var restaurantTypePassedIn = ""
-  var restaurantLocationPassedIn = ""
   
+  // MARK: - Variables
+  var restaurant = Restaurant()
   
   @IBOutlet weak var restaurantImageView: UIImageView!
   @IBOutlet weak var restaurantNameLabel: UILabel!
@@ -27,10 +24,10 @@ class RestaurantDetailViewController: UIViewController {
     super.viewDidLoad()
     
     navigationItem.largeTitleDisplayMode = .never
-    restaurantImageView.image = UIImage(named: restaurantImagePassedIn)
-    restaurantNameLabel.text = restaurantNamePassedIn
-    restaurantTypeLabel.text = restaurantTypePassedIn
-    restaurantLocationLabel.text = restaurantLocationPassedIn
+    restaurantImageView.image = UIImage(named: restaurant.image)
+    restaurantNameLabel.text = restaurant.name
+    restaurantTypeLabel.text = restaurant.type
+    restaurantLocationLabel.text = restaurant.location
   }
   
 }
