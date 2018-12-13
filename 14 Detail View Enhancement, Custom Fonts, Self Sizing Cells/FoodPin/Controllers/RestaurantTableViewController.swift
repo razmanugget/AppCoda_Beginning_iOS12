@@ -133,6 +133,7 @@ class RestaurantTableViewController: UITableViewController {
   }
   
   
+  // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showRestaurantDetail" {
       if let indexPath = tableView.indexPathForSelectedRow {
@@ -143,6 +144,7 @@ class RestaurantTableViewController: UITableViewController {
   }
   
   
+  // MARK: - View controller life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
