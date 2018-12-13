@@ -149,6 +149,7 @@ class RestaurantTableViewController: UITableViewController {
     super.viewDidLoad()
     
     navigationController?.navigationBar.prefersLargeTitles = true
+    tableView.separatorStyle = .none
     
     // adjust width on iPad only
     tableView.cellLayoutMarginsFollowReadableWidth = true
