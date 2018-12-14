@@ -16,6 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    
+    // change the back button for entire app (add space in storyboard for FoodPin scene to remove text)
+    let backButtonImage = UIImage(named: "back")
+    UINavigationBar.appearance().backIndicatorImage = backButtonImage
+    UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+    
+    // if wanting to change the statusbar style across the entire app
+    // must also change in info.plist
+//    UIApplication.shared.statusBarStyle = .lightContent
     return true
   }
 

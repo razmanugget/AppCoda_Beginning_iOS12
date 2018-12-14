@@ -124,7 +124,8 @@ class RestaurantTableViewController: UITableViewController {
     
     // color the options
     let checkInIcon = restaurants[indexPath.row].isVisited ? "undo" : "tick"
-    checkInAction.backgroundColor = UIColor(red: 38.0/255.0, green: 162.0/255.0, blue: 78.0/255.0, alpha: 1.0)
+    // using the extension here for simplier color choice
+    checkInAction.backgroundColor = UIColor(red: 38, green: 162, blue: 78)
     checkInAction.image = UIImage(named: checkInIcon)
     
     // show the options
@@ -145,10 +146,26 @@ class RestaurantTableViewController: UITableViewController {
   
   
   // MARK: - View controller life cycle
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    // hide nav bar just for this scene
+    navigationController?.hidesBarsOnSwipe = true
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    //nav bar customization
     navigationController?.navigationBar.prefersLargeTitles = true
+    // to make background transparent, set image and shadow to blank UIImage
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+    
+    if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
+      navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60), NSAttributedString.Key.font: customFont]
+    }
+    
     tableView.separatorStyle = .none
     
     // adjust width on iPad only

@@ -50,15 +50,35 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
   }
   
   
+  // MARK: - View controller life cycle
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    // show nav bar just for this scene
+    navigationController?.hidesBarsOnSwipe = false
+    navigationController?.setNavigationBarHidden(false, animated: true)
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // customize nav bar
     navigationItem.largeTitleDisplayMode = .never
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.tintColor = .white
+    // keeps the nav bar from blocking the top content (default is .always)
+    tableView.contentInsetAdjustmentBehavior = .never
     
+    // link data
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorStyle = .none
-    
     
     // configure header view
     headerView.headerImageView.image = UIImage(named: restaurant.image)
