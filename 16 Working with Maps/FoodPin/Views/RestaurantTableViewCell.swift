@@ -14,6 +14,7 @@ class RestaurantTableViewCell: UITableViewCell {
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var locationLabel: UILabel!
   @IBOutlet weak var typeLabel: UILabel!
+  @IBOutlet weak var backgroundTypeLabel: UILabel!
   @IBOutlet weak var thumbnailImageView: UIImageView! {
     didSet {
       thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 2
