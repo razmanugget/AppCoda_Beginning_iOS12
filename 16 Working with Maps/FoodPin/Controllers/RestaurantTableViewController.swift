@@ -172,5 +172,4 @@ class RestaurantTableViewController: UITableViewController {
     // adjust width on iPad only
     tableView.cellLayoutMarginsFollowReadableWidth = true
   }
-  
 }

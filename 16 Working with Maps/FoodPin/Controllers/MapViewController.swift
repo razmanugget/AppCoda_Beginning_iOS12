@@ -10,11 +10,36 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
+  var restaurant = Restaurant()
   
   @IBOutlet var mapView: MKMapView!
   
-  var restaurant = Restaurant()
   
+  
+  // MARK: - MKMapViewDelegate methods
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    let identifier = "MyMarker"
+    
+    if annotation.isKind(of: MKUserLocation.self) {
+      return nil
+    }
+    
+    // Reuse the annotation if possible
+    var annotationView: MKMarkerAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
+    
+    if annotationView == nil {
+      annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+    }
+    
+    annotationView?.glyphText = "😋"
+    annotationView?.markerTintColor = UIColor.orange
+    
+    return annotationView
+  }
+  
+  
+  
+  // MARK: - View controller life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -49,29 +74,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
           self.mapView.selectAnnotation(annotation, animated: true)
         }
       }
-      
     })
   }
   
-  // MARK: - MKMapViewDelegate methods
-  
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    let identifier = "MyMarker"
-    
-    if annotation.isKind(of: MKUserLocation.self) {
-      return nil
-    }
-    
-    // Reuse the annotation if possible
-    var annotationView: MKMarkerAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
-    
-    if annotationView == nil {
-      annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-    }
-    
-    annotationView?.glyphText = "😋"
-    annotationView?.markerTintColor = UIColor.orange
-    
-    return annotationView
-  }
 }

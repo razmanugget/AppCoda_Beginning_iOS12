@@ -305,7 +305,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="descriptionLabel" destination="S92-tk-ZUY" id="RA9-Da-IUF"/>
                                             <outlet property="titleLabel" destination="S92-tk-ZUY" id="O30-1C-rn7"/>
                                         </connections>
                                     </tableViewCell>
@@ -357,10 +356,10 @@
             </objects>
             <point key="canvasLocation" x="2108.695652173913" y="71.651785714285708"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="fEr-3s-tol">
             <objects>
-                <viewController id="c4m-Bm-QpJ" sceneMemberID="viewController">
+                <viewController id="c4m-Bm-QpJ" customClass="MapViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ci-KD-3ds">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -378,6 +377,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WmL-QC-FmN"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="bNU-wM-zGe" id="Zez-2a-CBJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KMu-lX-kTF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
