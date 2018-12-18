@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/home/Documents/Programming/MyNotes/GitHub/AppCoda_Beginning_iOS12/11 Table Row Deletion, Swipe for Actions, Activity Controller/FoodPin/Controllers/RestaurantTableViewCell.swift">
-   </FileRef>
-   <FileRef
       location = "self:FoodPin.xcodeproj">
    </FileRef>
 </Workspace>
