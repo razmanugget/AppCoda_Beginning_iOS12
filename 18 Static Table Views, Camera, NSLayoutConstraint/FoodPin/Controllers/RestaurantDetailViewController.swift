@@ -104,6 +104,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     return .lightContent
   }
   
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
