@@ -36,8 +36,8 @@ class ReviewViewController: UIViewController {
 //    UIView.animate(withDuration: 0.4, delay: 0.25, options: [], animations: { self.rateButtons[3].alpha = 1.0 }, completion: nil)
 //    UIView.animate(withDuration: 0.4, delay: 0.3, options: [], animations: { self.rateButtons[4].alpha = 1.0 }, completion: nil)
     
-    for rateButton in rateButtons {
-      var timeDelay = (rateButton * 0.05) + 0.1
+    for rateButton in 0...4 {
+      let timeDelay = (Double(rateButton) * 0.05) + 0.1
       UIView.animate(withDuration: 0.4, delay: timeDelay, options: [], animations: { self.rateButtons[rateButton].alpha = 1.0}, completion: nil)
     }
     
