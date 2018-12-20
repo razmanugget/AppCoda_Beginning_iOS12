@@ -13,17 +13,16 @@ class ReviewViewController: UIViewController {
   
   @IBOutlet var backgroundImageView: UIImageView!
   @IBOutlet var rateButtons: [UIButton]!
-  @IBOutlet var closeButton: UIButton!
+  @IBOutlet var closeButton: UIButton! 
   
   
   // MARK: - View controller life cycle
   override func viewWillAppear(_ animated: Bool) {
     // appear flowing down
-    UIView.animate(withDuration: 0.4, delay: 0.1, options: [], animations: { self.rateButtons[0].alpha = 1.0}, completion: nil)
-    UIView.animate(withDuration: 0.4, delay: 0.15, options: [], animations: { self.rateButtons[1].alpha = 1.0 }, completion: nil)
-    UIView.animate(withDuration: 0.4, delay: 0.2, options: [], animations: { self.rateButtons[2].alpha = 1.0 }, completion: nil)
-    UIView.animate(withDuration: 0.4, delay: 0.25, options: [], animations: { self.rateButtons[3].alpha = 1.0 }, completion: nil)
-    UIView.animate(withDuration: 0.4, delay: 0.3, options: [], animations: { self.rateButtons[4].alpha = 1.0 }, completion: nil)
+    for rateButton in 0...4 {
+      let timeDelay = (Double(rateButton) * 0.05) + 0.1
+      UIView.animate(withDuration: 0.4, delay: timeDelay, options: [], animations: { self.rateButtons[rateButton].alpha = 1.0}, completion: nil)
+    }
     
     // close button
     UIView.animate(withDuration: 1.0, delay: 0.15, options: [], animations: {
