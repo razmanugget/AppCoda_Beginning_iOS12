@@ -13,7 +13,7 @@ class ReviewViewController: UIViewController {
   
   @IBOutlet var backgroundImageView: UIImageView!
   @IBOutlet var rateButtons: [UIButton]!
-  @IBOutlet var closeButton: UIButton!
+  @IBOutlet var closeButton: UIButton! 
   
   
   // MARK: - View controller life cycle

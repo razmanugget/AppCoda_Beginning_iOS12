@@ -37,7 +37,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     })
   }
   
-  
+   
   
   // MARK: - Functions
   // MARK: - UITableViewDataSource Protocol
