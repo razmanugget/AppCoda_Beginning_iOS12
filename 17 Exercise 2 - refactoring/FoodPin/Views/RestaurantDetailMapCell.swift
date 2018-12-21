@@ -52,7 +52,6 @@ class RestaurantDetailMapCell: UITableViewCell {
           self.mapView.setRegion(region, animated: false)
         }
       }
-      
     })
   }
   
