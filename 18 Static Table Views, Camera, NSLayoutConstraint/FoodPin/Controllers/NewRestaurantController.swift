@@ -122,7 +122,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //    tableView.separatorStyle = .none
+    tableView.separatorStyle = .none
     
   }
   
