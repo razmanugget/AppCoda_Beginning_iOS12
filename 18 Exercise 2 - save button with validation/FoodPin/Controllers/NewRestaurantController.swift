@@ -48,15 +48,42 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
   
   @IBOutlet var photoImageView: UIImageView!
   
+
+  
+  @IBAction func saveButtonTapped(segue: UIStoryboardSegue) {
+    printTextToConsole()
+    print("hello")
+    print(descriptionTextView.text)
+    print(descriptionTextView.tag)
+    dismiss(animated: true, completion: nil)
+  }
+  
+  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let nextTextField = view.viewWithTag(textField.tag + 1) {
       textField.resignFirstResponder()
       nextTextField.becomeFirstResponder()
     }
-    
     return true
   }
   
+//  func saveText(_ textField: UITextField) -> String {
+//    print(descriptionTextView?[1])
+//  }
+  
+  func printTextToConsole() {
+    print("Name: ")
+//    print(descriptionTextView)
+//    print("Type: ")
+//    print(descriptionTextView.tag)
+  }
+  
+  func validateInput() {
+    print("Name: ")
+    //    print(descriptionTextView)
+    //    print("Type: ")
+    //    print(descriptionTextView.tag)
+  }
   
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

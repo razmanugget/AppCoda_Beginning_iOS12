@@ -140,7 +140,7 @@
                                             </constraints>
                                         </imageView>
                                         <view clipsSubviews="YES" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NuZ-rk-G8C" userLabel="Shader View">
-                                            <rect key="frame" x="9" y="269" width="176" height="72"/>
+                                            <rect key="frame" x="9" y="268.5" width="176" height="72.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -149,7 +149,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-v8-fYY" userLabel="Name Label">
-                                            <rect key="frame" x="14" y="272" width="166" height="41"/>
+                                            <rect key="frame" x="14" y="271.5" width="166" height="41.5"/>
                                             <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="35"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -643,10 +643,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Restaurant" id="u5U-Fx-fzS">
-                        <barButtonItem key="rightBarButtonItem" image="close" id="1hM-mG-Vhm">
+                        <barButtonItem key="leftBarButtonItem" image="close" id="1hM-mG-Vhm">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="7Xj-tF-eIh" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="So9-it-pjy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="save" id="zuN-fd-Np8">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="saveButtonTappedWithSegue:" destination="fcu-Vz-Dwc" id="ew7-vR-QMN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -805,5 +811,6 @@
         <image name="photo" width="24" height="18"/>
         <image name="plus" width="16" height="16"/>
         <image name="sad" width="78" height="87"/>
+        <image name="save" width="20" height="20"/>
     </resources>
 </document>

@@ -48,6 +48,11 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
   
   @IBOutlet var photoImageView: UIImageView!
   
+  
+  
+  
+  
+  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let nextTextField = view.viewWithTag(textField.tag + 1) {
       textField.resignFirstResponder()
@@ -56,7 +61,6 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
     
     return true
   }
-  
   
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
