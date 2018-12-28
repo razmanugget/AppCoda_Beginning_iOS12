@@ -48,17 +48,26 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
   
   @IBOutlet var photoImageView: UIImageView!
   
-
   
-  @IBAction func saveButtonTapped(segue: UIStoryboardSegue) {
-    printTextToConsole()
+  @IBAction func saveButtonTapped(sender: AnyObject) {
+    
+    self.printTextToConsole()
+    //      self.validateInput()
     print("hello")
-    print(descriptionTextView.text)
-    print(descriptionTextView.tag)
-    dismiss(animated: true, completion: nil)
+    print(self.descriptionTextView.text)
+    var errorType = ""
+    if nameTextField.text == "" {
+      errorType = "name"
+    } else if typeTextField.text == "" {
+      errorType = "type"
+    }
+    print(errorType)
+    
   }
   
+
   
+  // MARK: - UITextFieldDelegate methods
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let nextTextField = view.viewWithTag(textField.tag + 1) {
       textField.resignFirstResponder()
@@ -72,20 +81,27 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
 //  }
   
   func printTextToConsole() {
-    print("Name: ")
+    print("Name: print to console")
 //    print(descriptionTextView)
 //    print("Type: ")
 //    print(descriptionTextView.tag)
   }
   
-  func validateInput() {
-    print("Name: ")
-    //    print(descriptionTextView)
-    //    print("Type: ")
-    //    print(descriptionTextView.tag)
-  }
+//  func validateInput() {
+//    print("validating input now ")
+//    print(nameTextField)
+//    print(self.typeTextField.text)
+//    print("validating input now 2 ")
+//    if nameTextField == nil {
+//      print(nameTextField)
+//      print("Please enter the restaurant name")
+//    } else if typeTextField == nil {
+//      print("Please enter the restaurant type")
+//    }
+//  }
   
   
+  // MARK: - UIImagePickerControllerDelegate methods
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       photoImageView.image = selectedImage
@@ -109,6 +125,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
   }
   
   
+  // MARK: - UITableViewDelegate methods
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.row == 0 {
       let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
@@ -150,6 +167,13 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
     super.viewDidLoad()
     
     //    tableView.separatorStyle = .none
+    
+    // Configure navigation bar appearance
+    navigationController?.navigationBar.tintColor = .white
+    navigationController?.navigationBar.shadowImage = UIImage()
+    if let customFont = UIFont(name: "Rubik-Medium", size: 35.0) {
+      navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60), NSAttributedString.Key.font: customFont ]
+    }
     
   }
   

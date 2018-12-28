@@ -652,7 +652,7 @@
                         <barButtonItem key="rightBarButtonItem" image="save" id="zuN-fd-Np8">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="saveButtonTappedWithSegue:" destination="fcu-Vz-Dwc" id="ew7-vR-QMN"/>
+                                <action selector="saveButtonTappedWithSender:" destination="fcu-Vz-Dwc" id="oqj-Ul-ag4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
