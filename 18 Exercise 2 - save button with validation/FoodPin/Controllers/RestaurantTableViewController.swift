@@ -72,9 +72,11 @@ class RestaurantTableViewController: UITableViewController {
     return cell
   }
   
-  
   // MARK: - TableView actions
-  override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+  
+  override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+      
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {(action, sourceView, completionHandler) in
       // delete the row from the data source
       self.restaurants.remove(at: indexPath.row)
