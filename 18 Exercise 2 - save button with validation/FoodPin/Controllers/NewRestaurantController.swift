@@ -48,28 +48,46 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
   
   @IBOutlet var photoImageView: UIImageView!
   
-  
-  @IBAction func saveButtonTapped(sender: AnyObject) {
     
-    self.printTextToConsole()
-    //      self.validateInput()
-    print("hello")
-    print(self.descriptionTextView.text)
-    var errorType = ""
-    if nameTextField.text == "" {
-      errorType = "name"
-    } else if typeTextField.text == "" {
-      errorType = "type"
+    @IBAction func saveButtonTapped(sender: AnyObject) {
+        
+              self.validateInput()
+//        var errorType = ""
+//
+//        if nameTextField.text == "" {
+//            errorType = "name"
+//        } else if typeTextField.text == "" {
+//            errorType = "type"
+//        } else if addressTextField.text == "" {
+//            errorType = "address"
+//        } else if phoneTextField.text == "" {
+//            errorType = "phone"
+//        } else if descriptionTextView.text == "" {
+//            errorType = "description"
+//        }
+//
+//        if errorType != "" {
+//        let alertController =
+//            UIAlertController(title: "Oops", message: "We can't continue because you need to fill in the \(errorType) field", preferredStyle: .alert)
+//        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//        alertController.addAction(alertAction)
+//        present(alertController, animated: true, completion: nil)
+//        }
+        
+        print("Name: \(nameTextField.text ?? "")")
+        print("Type: \(typeTextField.text ?? "")")
+        print("Location: \(addressTextField.text ?? "")")
+        print("Phone: \(phoneTextField.text ?? "")")
+        print("Description: \(descriptionTextView.text ?? "")")
+        
+        dismiss(animated: true, completion: nil)
     }
-    print(errorType)
     
-  }
-  
-
-  
-  // MARK: - UITextFieldDelegate methods
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if let nextTextField = view.viewWithTag(textField.tag + 1) {
+    
+    
+    // MARK: - UITextFieldDelegate methods
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextTextField = view.viewWithTag(textField.tag + 1) {
       textField.resignFirstResponder()
       nextTextField.becomeFirstResponder()
     }
@@ -80,25 +98,32 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
 //    print(descriptionTextView?[1])
 //  }
   
-  func printTextToConsole() {
-    print("Name: print to console")
-//    print(descriptionTextView)
-//    print("Type: ")
-//    print(descriptionTextView.tag)
-  }
   
-//  func validateInput() {
-//    print("validating input now ")
-//    print(nameTextField)
-//    print(self.typeTextField.text)
-//    print("validating input now 2 ")
-//    if nameTextField == nil {
-//      print(nameTextField)
-//      print("Please enter the restaurant name")
-//    } else if typeTextField == nil {
-//      print("Please enter the restaurant type")
-//    }
-//  }
+  
+  func validateInput() {
+    var errorType = ""
+    
+    if nameTextField.text == "" {
+        errorType = "name"
+    } else if typeTextField.text == "" {
+        errorType = "type"
+    } else if addressTextField.text == "" {
+        errorType = "address"
+    } else if phoneTextField.text == "" {
+        errorType = "phone"
+    } else if descriptionTextView.text == "" {
+        errorType = "description"
+    }
+    
+    if errorType != "" {
+        let alertController =
+            UIAlertController(title: "Oops", message: "We can't continue because you need to fill in the \(errorType) field", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    return
+  }
   
   
   // MARK: - UIImagePickerControllerDelegate methods
