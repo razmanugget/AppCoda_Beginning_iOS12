@@ -50,8 +50,8 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
   
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
+        self.validateInput()
         
-              self.validateInput()
 //        var errorType = ""
 //
 //        if nameTextField.text == "" {
@@ -72,8 +72,10 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
 //        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
 //        alertController.addAction(alertAction)
 //        present(alertController, animated: true, completion: nil)
+//
+//            return
 //        }
-        
+       
         print("Name: \(nameTextField.text ?? "")")
         print("Type: \(typeTextField.text ?? "")")
         print("Location: \(addressTextField.text ?? "")")
@@ -94,15 +96,11 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
     return true
   }
   
-//  func saveText(_ textField: UITextField) -> String {
-//    print(descriptionTextView?[1])
-//  }
-  
   
   
   func validateInput() {
     var errorType = ""
-    
+
     if nameTextField.text == "" {
         errorType = "name"
     } else if typeTextField.text == "" {
@@ -114,15 +112,18 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
     } else if descriptionTextView.text == "" {
         errorType = "description"
     }
-    
+
     if errorType != "" {
         let alertController =
-            UIAlertController(title: "Oops", message: "We can't continue because you need to fill in the \(errorType) field", preferredStyle: .alert)
+            UIAlertController(title: "Oops", message:
+                "We can't continue because you need to fill in the \(errorType) field",
+                preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(alertAction)
         present(alertController, animated: true, completion: nil)
+        
+        return
     }
-    return
   }
   
   
