@@ -77,7 +77,9 @@ class RestaurantTableViewController: UITableViewController {
     
     // MARK: - TableView actions
     
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    override func tableView
+        (_ tableView: UITableView,
+         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
             
             let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
@@ -94,6 +96,8 @@ class RestaurantTableViewController: UITableViewController {
                 (action, sourceView, completionHandler) in
                 let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name
                 let activityController: UIActivityViewController
+                
+                
                 if let imageToShare = UIImage(named: self.restaurants[indexPath.row].image) {
                     activityController = UIActivityViewController(
                         activityItems: [defaultText, imageToShare], applicationActivities: nil)
