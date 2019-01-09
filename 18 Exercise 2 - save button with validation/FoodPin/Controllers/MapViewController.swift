@@ -11,15 +11,10 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
   var restaurant = Restaurant()
-  
   @IBOutlet var mapView: MKMapView!
-  
-  
-  
   // MARK: - MKMapViewDelegate methods
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     let identifier = "MyMarker"
-    
     if annotation.isKind(of: MKUserLocation.self) {
       return nil
     }
