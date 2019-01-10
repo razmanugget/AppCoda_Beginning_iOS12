@@ -30,7 +30,6 @@
 		F431B02E21B59B2C005EDE68 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F431B02D21B59B2C005EDE68 /* RestaurantTableViewCell.swift */; };
 		F451345421C037FD00DD138C /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F451345321C037FD00DD138C /* RestaurantDetailViewController.swift */; };
 		F496CB7A21CBC22C00A8652B /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F496CB7921CBC22C00A8652B /* RoundedTextField.swift */; };
-		F4A9B51A21E692A700AA1CD9 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F4A9B51921E692A700AA1CD9 /* swiftlint.yml */; };
 		F4AB8A4E21C836D100853017 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AB8A4D21C836D100853017 /* MapViewController.swift */; };
 		F4AB8A5021C8376A00853017 /* RestaurantDetailSeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AB8A4F21C8376A00853017 /* RestaurantDetailSeparatorCell.swift */; };
 		F4AB8A5221C837A900853017 /* RestaurantDetailMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AB8A5121C837A900853017 /* RestaurantDetailMapCell.swift */; };
@@ -65,7 +64,6 @@
 		F431B02D21B59B2C005EDE68 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		F451345321C037FD00DD138C /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		F496CB7921CBC22C00A8652B /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
-		F4A9B51921E692A700AA1CD9 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftlint.yml; sourceTree = "<group>"; };
 		F4AB8A4D21C836D100853017 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F4AB8A4F21C8376A00853017 /* RestaurantDetailSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSeparatorCell.swift; sourceTree = "<group>"; };
 		F4AB8A5121C837A900853017 /* RestaurantDetailMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMapCell.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				F40C7E3521B2EEC70074D929 /* Assets.xcassets */,
 				F40C7E3A21B2EEC70074D929 /* Info.plist */,
 				F40C7E3721B2EEC70074D929 /* LaunchScreen.storyboard */,
-				F4A9B51921E692A700AA1CD9 /* swiftlint.yml */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -249,7 +246,6 @@
 				F430657721C28CC600A6B652 /* Rubik-BlackItalic.ttf in Resources */,
 				F430657C21C28CC600A6B652 /* Rubik-LightItalic.ttf in Resources */,
 				F430657821C28CC600A6B652 /* Rubik-Bold.ttf in Resources */,
-				F4A9B51A21E692A700AA1CD9 /* swiftlint.yml in Resources */,
 				F40C7E3921B2EEC70074D929 /* LaunchScreen.storyboard in Resources */,
 				F40C7E3621B2EEC70074D929 /* Assets.xcassets in Resources */,
 				F430657B21C28CC600A6B652 /* Rubik-Light.ttf in Resources */,
