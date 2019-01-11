@@ -15,13 +15,14 @@ class ReviewViewController: UIViewController {
   @IBOutlet var rateButtons: [UIButton]!
   @IBOutlet var closeButton: UIButton! 
   
-  
   // MARK: - View controller life cycle
   override func viewWillAppear(_ animated: Bool) {
     // appear flowing down
     for rateButton in 0...4 {
       let timeDelay = (Double(rateButton) * 0.05) + 0.1
-      UIView.animate(withDuration: 0.4, delay: timeDelay, options: [], animations: { self.rateButtons[rateButton].alpha = 1.0}, completion: nil)
+      UIView.animate(
+        withDuration: 0.4, delay: timeDelay, options: [], animations: {
+            self.rateButtons[rateButton].alpha = 1.0}, completion: nil)
     }
     
     // close button
@@ -30,7 +31,6 @@ class ReviewViewController: UIViewController {
       self.closeButton.transform = .identity  // resets to original position from storyboard
     }, completion: nil)
   }
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()

@@ -10,16 +10,26 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
+    
   var restaurant = Restaurant()
+    
   @IBOutlet var mapView: MKMapView!
+    
   // MARK: - MKMapViewDelegate methods
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    
+  func mapView(
+    _ mapView: MKMapView,
+    viewFor annotation: MKAnnotation
+    ) -> MKAnnotationView? {
+    
     let identifier = "MyMarker"
     if annotation.isKind(of: MKUserLocation.self) {
       return nil
     }
+    
     // Reuse the annotation if possible
-    var annotationView: MKMarkerAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
+    var annotationView: MKMarkerAnnotationView? = mapView.dequeueReusableAnnotationView(
+        withIdentifier: identifier) as? MKMarkerAnnotationView
     if annotationView == nil {
       annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
     }
@@ -27,7 +37,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     annotationView?.markerTintColor = UIColor.orange
     return annotationView
   }
+    
   // MARK: - View controller life cycle
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     // Customize the map view
