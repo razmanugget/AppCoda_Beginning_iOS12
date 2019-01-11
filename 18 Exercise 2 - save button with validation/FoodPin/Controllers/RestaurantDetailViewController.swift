@@ -55,8 +55,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         cellForRowAt indexPath: IndexPath
         ) -> UITableViewCell {
         
-        switch
-        indexPath.row {
+        switch indexPath.row {
         case 0:
             // using this version (describing) instead of other will show errors if the cell ID isn't found
             let cell = tableView.dequeueReusableCell(
@@ -91,8 +90,6 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
             fatalError("Failed to instantiate the table view cell for detail view controller")
         }
     }
-    
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
