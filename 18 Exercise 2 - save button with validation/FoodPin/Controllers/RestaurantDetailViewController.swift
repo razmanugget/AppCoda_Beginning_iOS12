@@ -55,7 +55,8 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         cellForRowAt indexPath: IndexPath
         ) -> UITableViewCell {
         
-        switch indexPath.row {
+        switch
+        indexPath.row {
         case 0:
             // using this version (describing) instead of other will show errors if the cell ID isn't found
             let cell = tableView.dequeueReusableCell(
@@ -104,8 +105,6 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
-    
-    
     // MARK: - View controller life cycle
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -118,7 +117,6 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

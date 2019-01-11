@@ -104,7 +104,6 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         return error
     }
     
-    
     // MARK: - UIImagePickerControllerDelegate methods
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
