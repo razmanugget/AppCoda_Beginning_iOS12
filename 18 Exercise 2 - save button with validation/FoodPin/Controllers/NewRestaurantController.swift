@@ -86,7 +86,6 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         return true
     }
     
-    
     func validateInput() -> String {
         var error = ""
         
@@ -128,12 +127,12 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         dismiss(animated: true, completion: nil)
     }
     
-    
     // MARK: - UITableViewDelegate methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
+            let photoSourceRequestController = UIAlertController(
+                title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
             let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: {(action) in
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
                     let imagePicker = UIImagePickerController()
@@ -165,7 +164,6 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
             present(photoSourceRequestController, animated: true, completion: nil)
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

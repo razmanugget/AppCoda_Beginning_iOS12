@@ -122,7 +122,6 @@ class RestaurantTableViewController: UITableViewController {
             return swipeConfiguration
     }
     
-    
     override func tableView
         (_ tableView: UITableView,
          leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
@@ -150,7 +149,6 @@ class RestaurantTableViewController: UITableViewController {
             return swipeConfiguration
     }
     
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRestaurantDetail" {
@@ -160,7 +158,6 @@ class RestaurantTableViewController: UITableViewController {
             }
         }
     }
-    
     
     // MARK: - View controller life cycle
     override func viewWillAppear(_ animated: Bool) {
