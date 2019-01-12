@@ -55,41 +55,43 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         cellForRowAt indexPath: IndexPath
         ) -> UITableViewCell {
         
-switch indexPath.row {
-case 0:
-// using this version (describing) instead of other will show errors if the cell ID isn't found
-let cell = tableView.dequeueReusableCell(
-withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath)
-as! RestaurantDetailIconTextCell
-cell.iconImageView.image = UIImage(named: "phone")
-cell.shortTextLabel.text = restaurant.phone
-cell.selectionStyle = .none
-return cell
-case 1:
-let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-cell.iconImageView.image = UIImage(named: "map")
-cell.shortTextLabel.text = restaurant.location
-cell.selectionStyle = .none
-return cell
-case 2:
-let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
-cell.descriptionLabel.text = restaurant.description
-cell.selectionStyle = .none
-return cell
-case 3:
-let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailSeparatorCell.self), for: indexPath) as! RestaurantDetailSeparatorCell
-cell.titleLabel.text = "HOW TO GET HERE"
-cell.selectionStyle = .none
-return cell
-case 4:
-let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
-cell.configure(location: restaurant.location)
-cell.selectionStyle = .none
-return cell
-default:
-fatalError("Failed to instantiate the table view cell for detail view controller")
-}
+        switch indexPath.row {
+        case 0:
+            // using this version (describing) instead of other will show errors if the cell ID isn't found
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath)
+                as! RestaurantDetailIconTextCell
+            cell.iconImageView.image = UIImage(named: "phone")
+            cell.shortTextLabel.text = restaurant.phone
+            cell.selectionStyle = .none
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
+            cell.iconImageView.image = UIImage(named: "map")
+            cell.shortTextLabel.text = restaurant.location
+            cell.selectionStyle = .none
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
+            cell.descriptionLabel.text = restaurant.description
+            cell.selectionStyle = .none
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailSeparatorCell.self), for: indexPath) as! RestaurantDetailSeparatorCell
+            cell.titleLabel.text = "HOW TO GET HERE"
+            cell.selectionStyle = .none
+            return cell
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
+            cell.configure(location: restaurant.location)
+            cell.selectionStyle = .none
+            return cell
+        default:
+            fatalError("Failed to instantiate the table view cell for detail view controller")
+        }
     }
+    
+
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
