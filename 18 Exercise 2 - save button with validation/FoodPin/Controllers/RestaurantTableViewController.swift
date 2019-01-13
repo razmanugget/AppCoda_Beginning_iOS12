@@ -19,7 +19,9 @@ class RestaurantTableViewController: UITableViewController {
             type: "Coffee & Tea Shop",
             location: "G/F, 72 Po Hing Fong, Sheung Wan, Hong Kong",
             phone: "232-923423",
-            description: "Searching for great breakfast eateries and coffee? This place is for you. We open at 6:30 every morning, and close at 9 PM. We offer espresso and espresso based drink, such as capuccino, cafe latte, piccolo and many more. Come over and enjoy a great meal.",
+            description: ["Searching for great breakfast eateries and coffee? This place is for you.",
+            "We open at 6:30 every morning, and close at 9 PM. We offer espresso and espresso based drink,",
+            "such as capuccino, cafe latte, piccolo and many more. Come over and enjoy a great meal."].joined(),
             image: "cafedeadend.jpg",
             isVisited: false
         ),
@@ -28,6 +30,7 @@ class RestaurantTableViewController: UITableViewController {
             type: "Cafe",
             location: "Shop B, G/F, 22-24A Tai Ping San Street SOHO, Sheung Wan, Hong Kong",
             phone: "348-233423",
+            // swiftlint:disable:next line_length
             description: "A little gem hidden at the corner of the street is nothing but fantastic! This place is warm and cozy. We open at 7 every morning except Sunday, and close at 9 PM. We offer a variety of coffee drinks and specialties including lattes, cappuccinos, teas, and more. We serve breakfast, lunch, and dinner in an airy open setting. Come over, have a coffee and enjoy a chit-chat with our baristas.",
             image: "homei.jpg",
             isVisited: false
@@ -84,7 +87,8 @@ class RestaurantTableViewController: UITableViewController {
             phone: "982-434343",
             description: "We make everything by hand with the best possible ingredients, from organic sourdoughs to pastries and cakes. A combination of great produce, good strong coffee, artisanal skill and hard work creates the honest, soulful, delectable bites that have made Bourke Street Bakery famous. Visit us at one of our many Sydney locations!",
             image: "bourkestreetbakery.jpg",
-            isVisited: false),
+            isVisited: false
+        ),
         Restaurant(
             name: "Haigh's Chocolate",
             type: "Cafe",
@@ -158,11 +162,50 @@ class RestaurantTableViewController: UITableViewController {
             isVisited: false
         ),
         Restaurant(
-            name: "Confessional", type: "Spanish", location: "308 E 6th St New York, NY 10003", phone: "643-332323", description: "Most delicious cocktail you would ever try! Our menu includes a wide range of high quality internationally inspired dishes, vegetarian options, and local cuisine. We open at 10 AM, and close at 10 PM. We welcome you into our place to enjoy a meal with your friends.", image: "confessional.jpg", isVisited: false),
-        Restaurant(name: "Barrafina", type: "Spanish", location: "54 Frith Street London W1D 4SL United Kingdom", phone: "542-343434", description: "a collection of authentic Spanish Tapas bars in Central London! We have an open kitchen, a beautiful marble-topped bar where guests can sit and watch the chefs at work and stylish red leather stools. Lunch starts at 1 PM. Dinners starts 5:30 PM.", image: "barrafina.jpg", isVisited: false),
-        Restaurant(name: "Donostia", type: "Spanish", location: "10 Seymour Place London W1H 7ND United Kingdom", phone: "722-232323", description: "Very good basque food, creative dishes with terrific flavors! Donostia is a high end tapas restaurant with a friendly relaxed ambiance. Come over to enjoy awesome tapas!", image: "donostia.jpg", isVisited: false),
-        Restaurant(name: "Royal Oak", type: "British", location: "2 Regency Street London SW1P 4BZ United Kingdom", phone: "343-988834", description: "Specialise in great pub food. Established in 1872, we have local and world lagers, craft beer and a selection of wine and spirits for people to enjoy. Don't forget to try our range of Young's Ales and Fish and Chips.", image: "royaloak.jpg", isVisited: false),
-        Restaurant(name: "CASK Pub and Kitchen", type: "Thai", location: "22 Charlwood Street London SW1V 2DY Pimlico", phone: "432-344050", description: "With kitchen serving gourmet burgers. We offer food every day of the week, Monday through to Sunday. Join us every Sunday from 4:30 – 7:30pm for live acoustic music!", image: "caskpubkitchen.jpg", isVisited: false)
+            name: "Confessional",
+            type: "Spanish",
+            location: "308 E 6th St New York, NY 10003",
+            phone: "643-332323",
+            description: "Most delicious cocktail you would ever try! Our menu includes a wide range of high quality internationally inspired dishes, vegetarian options, and local cuisine. We open at 10 AM, and close at 10 PM. We welcome you into our place to enjoy a meal with your friends.",
+            image: "confessional.jpg",
+            isVisited: false
+        ),
+        Restaurant(
+            name: "Barrafina",
+            type: "Spanish",
+            location: "54 Frith Street London W1D 4SL United Kingdom",
+            phone: "542-343434",
+            description: "a collection of authentic Spanish Tapas bars in Central London! We have an open kitchen, a beautiful marble-topped bar where guests can sit and watch the chefs at work and stylish red leather stools. Lunch starts at 1 PM. Dinners starts 5:30 PM.",
+            image: "barrafina.jpg",
+            isVisited: false
+        ),
+        Restaurant(
+            name: "Donostia",
+            type: "Spanish",
+            location: "10 Seymour Place London W1H 7ND United Kingdom",
+            phone: "722-232323",
+            description: "Very good basque food, creative dishes with terrific flavors! Donostia is a high end tapas restaurant with a friendly relaxed ambiance. Come over to enjoy awesome tapas!",
+            image: "donostia.jpg",
+            isVisited: false
+        ),
+        Restaurant(
+            name: "Royal Oak",
+            type: "British",
+            location: "2 Regency Street London SW1P 4BZ United Kingdom",
+            phone: "343-988834",
+            description: "Specialise in great pub food. Established in 1872, we have local and world lagers, craft beer and a selection of wine and spirits for people to enjoy. Don't forget to try our range of Young's Ales and Fish and Chips.",
+            image: "royaloak.jpg",
+            isVisited: false
+        ),
+        Restaurant(
+            name: "CASK Pub and Kitchen",
+            type: "Thai",
+            location: "22 Charlwood Street London SW1V 2DY Pimlico",
+            phone: "432-344050",
+            description: "With kitchen serving gourmet burgers. We offer food every day of the week, Monday through to Sunday. Join us every Sunday from 4:30 – 7:30pm for live acoustic music!",
+            image: "caskpubkitchen.jpg",
+            isVisited: false
+        )
     ]
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
@@ -171,8 +214,8 @@ class RestaurantTableViewController: UITableViewController {
     
     // MARK: - Functions
     
-    
     // MARK: - Override Functions
+    
     // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView)
         -> Int {
@@ -209,7 +252,7 @@ class RestaurantTableViewController: UITableViewController {
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
             
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
                 // delete the row from the data source
                 self.restaurants.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
@@ -218,8 +261,7 @@ class RestaurantTableViewController: UITableViewController {
                 completionHandler(true)
             }
             
-            let shareAction = UIContextualAction(style: .normal, title: "Share") {
-                (action, sourceView, completionHandler) in
+            let shareAction = UIContextualAction(style: .normal, title: "Share") { (_, _, completionHandler) in
                 let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name
                 let activityController: UIActivityViewController
                 if let imageToShare = UIImage(named: self.restaurants[indexPath.row].image) {
@@ -257,8 +299,7 @@ class RestaurantTableViewController: UITableViewController {
          leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
             
-            let checkInAction = UIContextualAction(style: .normal, title: "Check In") {
-                (action, sourceView, completionHandler) in
+            let checkInAction = UIContextualAction(style: .normal, title: "Check In") { (_, _, completionHandler) in
                 // check-in
                 let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
                 self.restaurants[indexPath.row].isVisited = (self.restaurants[indexPath.row].isVisited) ? false : true
