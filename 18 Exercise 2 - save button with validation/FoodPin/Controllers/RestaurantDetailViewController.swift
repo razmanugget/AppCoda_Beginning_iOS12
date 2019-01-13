@@ -29,9 +29,15 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
                 self.headerView.ratingImageView.transform = scaleTransform
                 self.headerView.ratingImageView.alpha = 0
                 // bounce in effect
-                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
-                    self.headerView.ratingImageView.transform = .identity
-                    self.headerView.ratingImageView.alpha = 1
+                UIView.animate(
+                    withDuration: 0.4,
+                    delay: 0,
+                    usingSpringWithDamping: 0.3,
+                    initialSpringVelocity: 0.7,
+                    options: [],
+                    animations: {
+                        self.headerView.ratingImageView.transform = .identity
+                        self.headerView.ratingImageView.alpha = 1
                 }, completion: nil)
             }
         })
@@ -46,7 +52,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int)
+        -> Int {
         return 5
     }
     
