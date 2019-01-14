@@ -36,6 +36,14 @@ class Restaurant {
     self.rating = rating
   }
   convenience init() {
-    self.init(name: "", type: "", location: "", phone: "", description: "", image: "", isVisited: false)
+    self.init(
+        name: "",
+        type: "",
+        location: "",
+        phone: "",
+        description: "",
+        image: "",
+        isVisited: false
+    )
   }
 }
