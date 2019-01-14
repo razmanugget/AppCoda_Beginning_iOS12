@@ -49,11 +49,21 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     return 5
   }
   
+//    guard let someArray=myJSON as? NSArray else {
+//    // Display a UIAlertController telling the user to check for an updated app..
+//    return
+//    }
+    
+    
+    
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     switch indexPath.row {
     case 0:
       // using this version (describing) instead of other will show errors if the cell ID isn't found
-      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as? RestaurantDetailIconTextCell else {
+            print("error pulling phone number")
+            return
+        }
       cell.iconImageView.image = UIImage(named: "phone")
       cell.shortTextLabel.text = restaurant.phone
       cell.selectionStyle = .none
