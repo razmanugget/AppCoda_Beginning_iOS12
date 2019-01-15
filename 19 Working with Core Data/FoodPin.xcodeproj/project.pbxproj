@@ -218,11 +218,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F40C7E3D21B2EEC70074D929 /* Build configuration list for PBXNativeTarget "FoodPin" */;
 			buildPhases = (
+				F4A9B51721E6606400AA1CD9 /* SwiftLint script */,
 				A49EF2EBA2A6E2A7A7F7E26E /* [CP] Check Pods Manifest.lock */,
 				F40C7E2721B2EEC50074D929 /* Sources */,
 				F40C7E2821B2EEC50074D929 /* Frameworks */,
 				F40C7E2921B2EEC50074D929 /* Resources */,
-				F4A9B51721E6606400AA1CD9 /* SwiftLint script */,
 			);
 			buildRules = (
 			);
@@ -328,7 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
