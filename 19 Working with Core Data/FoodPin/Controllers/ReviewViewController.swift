@@ -9,7 +9,7 @@
 import UIKit
 
 class ReviewViewController: UIViewController {
-  var restaurant = Restaurant()
+    var restaurant: RestaurantMO!
   
   @IBOutlet var backgroundImageView: UIImageView!
   @IBOutlet var rateButtons: [UIButton]!
@@ -34,7 +34,10 @@ class ReviewViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundImageView.image = UIImage(named: restaurant.image)
+    if let restaurantImage = restaurant.image {
+         backgroundImageView.image = UIImage(data: restaurantImage as Data)
+    }
+   
     
     // apply a blur effect programmatically
     let blurEffect = UIBlurEffect(style: .dark)
