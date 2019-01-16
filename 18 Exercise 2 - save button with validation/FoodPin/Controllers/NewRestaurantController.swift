@@ -74,8 +74,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         
         dismiss(animated: true, completion: nil)
     }
-    
-    
+
     // MARK: - UITextFieldDelegate methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
