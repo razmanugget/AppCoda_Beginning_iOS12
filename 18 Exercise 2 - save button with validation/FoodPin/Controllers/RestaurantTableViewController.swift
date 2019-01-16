@@ -243,15 +243,20 @@ class RestaurantTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int)
         -> Int {
+
             return restaurants.count
     }
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
-            let cellIdentifier = "datacell"
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
 
+            let cellIdentifier = "datacell"
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                as? RestaurantTableViewCell else {
+                    print("error removing datacell")
+                    return UITableViewCell()
+            }
             cell.nameLabel.text = restaurants[indexPath.row].name
             cell.thumbnailImageView.image = UIImage(named: restaurants[indexPath.row].image)
             cell.locationLabel.text = restaurants[indexPath.row].location
@@ -315,7 +320,11 @@ class RestaurantTableViewController: UITableViewController {
             
             let checkInAction = UIContextualAction(style: .normal, title: "Check In") { (_, _, completionHandler) in
                 // check-in
-                let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+                guard let cell = tableView.cellForRow(at: indexPath)
+                    as? RestaurantTableViewCell else {
+                        print("error with check-in")
+                        return
+                }
                 self.restaurants[indexPath.row].isVisited = (self.restaurants[indexPath.row].isVisited) ? false : true
                 cell.heartImageView.isHidden = self.restaurants[indexPath.row].isVisited ? false : true
                 
@@ -338,7 +347,10 @@ class RestaurantTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! RestaurantDetailViewController
+                guard let destinationController = segue.destination as? RestaurantDetailViewController else {
+                    print("segue error")
+                    return
+                }
                 destinationController.restaurant = restaurants[indexPath.row]
             }
         }

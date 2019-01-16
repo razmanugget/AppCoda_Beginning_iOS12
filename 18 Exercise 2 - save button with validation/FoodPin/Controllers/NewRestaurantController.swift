@@ -80,16 +80,15 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     func textFieldShouldReturn(_ textField: UITextField)
         -> Bool {
 
-        if let nextTextField = view.viewWithTag(textField.tag + 1) {
-            textField.resignFirstResponder()
-            nextTextField.becomeFirstResponder()
-        }
-        return true
+            if let nextTextField = view.viewWithTag(textField.tag + 1) {
+                textField.resignFirstResponder()
+                nextTextField.becomeFirstResponder()
+            }
+            return true
     }
     
     func validateInput() -> String {
         var error = ""
-        
         if let text = nameTextField.text, !text.isEmpty {
             error = "name"
         } else if let text = typeTextField.text, !text.isEmpty {

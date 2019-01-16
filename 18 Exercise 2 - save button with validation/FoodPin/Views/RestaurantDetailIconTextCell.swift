@@ -10,15 +10,14 @@ import UIKit
 
 class RestaurantDetailIconTextCell: UITableViewCell {
 
-  @IBOutlet var iconImageView: UIImageView!
-  @IBOutlet var shortTextLabel: UILabel! {
-    didSet {
-      shortTextLabel.numberOfLines = 0
+    @IBOutlet var iconImageView: UIImageView!
+    @IBOutlet var shortTextLabel: UILabel! {
+        didSet {
+            shortTextLabel.numberOfLines = 0
+        }
     }
-  }
-  
-  
-  override func awakeFromNib() {
+
+    override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }

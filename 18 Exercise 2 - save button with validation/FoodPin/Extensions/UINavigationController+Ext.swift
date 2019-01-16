@@ -9,8 +9,8 @@
 import UIKit
 
 extension UINavigationController {
-  // allow different statusbar styles in different scenes
-  open override var childForStatusBarStyle: UIViewController? {
-    return topViewController
-  }
+    // allow different statusbar styles in different scenes
+    open override var childForStatusBarStyle: UIViewController? {
+        return topViewController
+    }
 }
