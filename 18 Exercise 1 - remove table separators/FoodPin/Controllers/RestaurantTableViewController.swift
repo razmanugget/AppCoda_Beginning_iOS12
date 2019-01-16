@@ -59,9 +59,16 @@ class RestaurantTableViewController: UITableViewController {
   }
   
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView,
+                          cellForRowAt indexPath: IndexPath)
+    -> UITableViewCell {
+
     let cellIdentifier = "datacell"
-    let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+            as? RestaurantTableViewCell else {
+            print("error removing datacell")
+            return UITableViewCell()
+        }
     
     cell.nameLabel.text = restaurants[indexPath.row].name
     cell.thumbnailImageView.image = UIImage(named: restaurants[indexPath.row].image)
@@ -74,7 +81,9 @@ class RestaurantTableViewController: UITableViewController {
   
   
   // MARK: - TableView actions
-  override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+  override func tableView(_ tableView: UITableView,
+                          trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {(action, sourceView, completionHandler) in
       // delete the row from the data source
       self.restaurants.remove(at: indexPath.row)
@@ -116,10 +125,17 @@ class RestaurantTableViewController: UITableViewController {
   }
   
   
-  override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let checkInAction = UIContextualAction(style: .normal, title: "Check In") {(action, sourceView, completionHandler) in
+  override func tableView(_ tableView: UITableView,
+                          leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+    let checkInAction = UIContextualAction(style: .normal, title: "Check In") { (action, sourceView, completionHandler) in
       // check-in
-      let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+//        let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+      guard let cell = tableView.cellForRow(at: indexPath)
+        as? RestaurantTableViewCell else {
+            print("error with check-in")
+            return
+        }
       self.restaurants[indexPath.row].isVisited = (self.restaurants[indexPath.row].isVisited) ? false : true
       cell.heartImageView.isHidden = self.restaurants[indexPath.row].isVisited ? false : true
       
@@ -143,7 +159,10 @@ class RestaurantTableViewController: UITableViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showRestaurantDetail" {
       if let indexPath = tableView.indexPathForSelectedRow {
-        let destinationController = segue.destination as! RestaurantDetailViewController
+        guard let destinationController = segue.destination as? RestaurantDetailViewController else {
+            print("segue error")
+            return
+        }
         destinationController.restaurant = restaurants[indexPath.row]
       }
     }

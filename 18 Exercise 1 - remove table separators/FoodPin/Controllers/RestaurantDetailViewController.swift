@@ -69,23 +69,43 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
       cell.selectionStyle = .none
       return cell
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-      cell.iconImageView.image = UIImage(named: "map")
-      cell.shortTextLabel.text = restaurant.location
-      cell.selectionStyle = .none
-      return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+            describing: RestaurantDetailIconTextCell.self), for: indexPath)
+            as? RestaurantDetailIconTextCell else {
+                print("error pulling map")
+                return UITableViewCell()
+        }
+        cell.iconImageView.image = UIImage(named: "map")
+        cell.shortTextLabel.text = restaurant.location
+        cell.selectionStyle = .none
+        return cell
     case 2:
-      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+        describing: RestaurantDetailTextCell.self), for: indexPath)
+        as? RestaurantDetailTextCell else {
+            print("error pulling description")
+            return UITableViewCell()
+      }
       cell.descriptionLabel.text = restaurant.description
       cell.selectionStyle = .none
       return cell
     case 3:
-      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailSeparatorCell.self), for: indexPath) as! RestaurantDetailSeparatorCell
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+        describing: RestaurantDetailSeparatorCell.self), for: indexPath)
+        as? RestaurantDetailSeparatorCell else {
+            print("error pulling label")
+            return UITableViewCell()
+      }
       cell.titleLabel.text = "HOW TO GET HERE"
       cell.selectionStyle = .none
       return cell
     case 4:
-      let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+        describing: RestaurantDetailMapCell.self), for: indexPath)
+        as? RestaurantDetailMapCell else {
+            print("error pulling location")
+            return UITableViewCell()
+      }
       cell.configure(location: restaurant.location)
       cell.selectionStyle = .none
       return cell
