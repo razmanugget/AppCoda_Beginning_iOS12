@@ -62,7 +62,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
       // using this version (describing) instead of other will show errors if the cell ID isn't found
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as? RestaurantDetailIconTextCell else {
             print("error pulling phone number")
-            return
+            return UITableViewCell()
         }
       cell.iconImageView.image = UIImage(named: "phone")
       cell.shortTextLabel.text = restaurant.phone
