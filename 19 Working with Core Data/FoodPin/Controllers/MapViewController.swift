@@ -16,9 +16,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - MKMapViewDelegate methods
 
-    func mapView(
-        _ mapView: MKMapView,
-        viewFor annotation: MKAnnotation)
+    func mapView(_ mapView: MKMapView,
+                 viewFor annotation: MKAnnotation)
         -> MKAnnotationView? {
             let identifier = "MyMarker"
 
@@ -27,7 +26,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
 
             // Reuse the annotation if possible
-            var annotationView: MKMarkerAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
+            var annotationView: MKMarkerAnnotationView? =
+                mapView.dequeueReusableAnnotationView(
+                    withIdentifier: identifier) as? MKMarkerAnnotationView
             
             if annotationView == nil {
                 annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)

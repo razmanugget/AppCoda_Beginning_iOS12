@@ -29,85 +29,117 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
                 self.headerView.ratingImageView.transform = scaleTransform
                 self.headerView.ratingImageView.alpha = 0
                 // bounce in effect
-                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
-                    self.headerView.ratingImageView.transform = .identity
-                    self.headerView.ratingImageView.alpha = 1
+                UIView.animate(
+                    withDuration: 0.4,
+                    delay: 0,
+                    usingSpringWithDamping: 0.3,
+                    initialSpringVelocity: 0.7,
+                    options: [],
+                    animations: {
+                        self.headerView.ratingImageView.transform = .identity
+                        self.headerView.ratingImageView.alpha = 1
                 }, completion: nil)
             }
         })
     }
     
     // MARK: - Functions
+
     // MARK: - UITableViewDataSource Protocol
-    func numberOfSections(
-        in tableView: UITableView)
+    func numberOfSections(in tableView: UITableView)
         -> Int {
-        return 1
+            return 1
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int)
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int)
         -> Int {
-        return 5
+            return 5
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath)
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            // using this version (describing) instead of other will show errors if the cell ID isn't found
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-            cell.iconImageView.image = UIImage(named: "phone")
-            cell.shortTextLabel.text = restaurant.phone
-            cell.selectionStyle = .none
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
-            cell.iconImageView.image = UIImage(named: "map")
-            cell.shortTextLabel.text = restaurant.location
-            cell.selectionStyle = .none
-            return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
-            cell.descriptionLabel.text = restaurant.description
-            cell.selectionStyle = .none
-            return cell
-        case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailSeparatorCell.self), for: indexPath) as! RestaurantDetailSeparatorCell
-            cell.titleLabel.text = "HOW TO GET HERE"
-            cell.selectionStyle = .none
-            return cell
-        case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
-            if let restaurantLocation = restaurant.location {
-                cell.configure(location: restaurantLocation)
+
+            switch indexPath.row {
+            case 0:
+                // using this version (describing) instead of other will show errors if the cell ID isn't found
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+                    describing: RestaurantDetailIconTextCell.self), for: indexPath)
+                    as? RestaurantDetailIconTextCell else {
+                        print("error pulling phone number")
+                        return UITableViewCell()
+                }
+                cell.iconImageView.image = UIImage(named: "phone")
+                cell.shortTextLabel.text = restaurant.phone
+                cell.selectionStyle = .none
+                return cell
+            case 1:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+                    describing: RestaurantDetailIconTextCell.self), for: indexPath)
+                    as? RestaurantDetailIconTextCell else {
+                        print("error pulling map")
+                        return UITableViewCell()
+                }
+                cell.iconImageView.image = UIImage(named: "map")
+                cell.shortTextLabel.text = restaurant.location
+                cell.selectionStyle = .none
+                return cell
+            case 2:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+                    describing: RestaurantDetailTextCell.self), for: indexPath)
+                    as? RestaurantDetailTextCell else {
+                        print("error pulling description")
+                        return UITableViewCell()
+                }
+                cell.descriptionLabel.text = restaurant.description
+                cell.selectionStyle = .none
+                return cell
+            case 3:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+                    describing: RestaurantDetailSeparatorCell.self), for: indexPath)
+                    as? RestaurantDetailSeparatorCell else {
+                        print("error pulling label")
+                        return UITableViewCell()
+                }
+                cell.titleLabel.text = "HOW TO GET HERE"
+                cell.selectionStyle = .none
+                return cell
+            case 4:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(
+                    describing: RestaurantDetailMapCell.self), for: indexPath)
+                    as? RestaurantDetailMapCell else {
+                        print("error pulling location")
+                        return UITableViewCell()
+                }
+                if let restaurantLocation = restaurant.location {
+                    cell.configure(location: restaurantLocation)
+                }
+
+                cell.selectionStyle = .none
+                return cell
+            default:
+                fatalError("Failed to instantiate the table view cell for detail view controller")
             }
-            
-            cell.selectionStyle = .none
-            return cell
-        default:
-            fatalError("Failed to instantiate the table view cell for detail view controller")
-        }
     }
-    
-    
-    
+
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMap" {
-            let destinationController = segue.destination as! MapViewController
+            guard let destinationController = segue.destination as? MapViewController else {
+                print("segue mapview error")
+                return
+            }
             destinationController.restaurant = restaurant
         } else if segue.identifier == "showReview" {
-            let destinationController = segue.destination as! ReviewViewController
+            guard let destinationController = segue.destination as? ReviewViewController else {
+                print("segue show review error")
+                return
+            }
             destinationController.restaurant = restaurant
         }
     }
-    
-    
-    
+
     // MARK: - View controller life cycle
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -120,8 +152,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
