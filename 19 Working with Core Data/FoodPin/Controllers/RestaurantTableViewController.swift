@@ -11,12 +11,10 @@ import UIKit
 // MARK: - Enums | Extensions
 // MARK: - IBActions
 
-
 class RestaurantTableViewController: UITableViewController {
     // MARK: - Variables
     var restaurants: [RestaurantMO] = []
-//        
-    
+
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
@@ -31,16 +29,22 @@ class RestaurantTableViewController: UITableViewController {
             return 1  // this is the default value
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int)
         -> Int {
             return restaurants.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
+
             let cellIdentifier = "datacell"
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
-            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                as? RestaurantTableViewCell else {
+                    print("error removing datacell")
+                    return UITableViewCell()
+            }
             cell.nameLabel.text = restaurants[indexPath.row].name
             if let restaurantImage = restaurants[indexPath.row].image {
                 cell.thumbnailImageView.image = UIImage(data: restaurantImage as Data)
@@ -54,23 +58,20 @@ class RestaurantTableViewController: UITableViewController {
     
     // MARK: - TableView actions
     
-    override func tableView(
-        _ tableView: UITableView,
-        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
             
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
-                (action, sourceView, completionHandler) in
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
                 // delete the row from the data source
                 self.restaurants.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
-                
+
                 // call completion handler to dismiss the action button
                 completionHandler(true)
             }
             
-            let shareAction = UIContextualAction(style: .normal, title: "Share") {
-                (action, sourceView, completionHandler) in
+            let shareAction = UIContextualAction(style: .normal, title: "Share") { (_, sourceView, completionHandler) in
                 let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name!
                 let activityController: UIActivityViewController
                 
@@ -104,17 +105,18 @@ class RestaurantTableViewController: UITableViewController {
             let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
             return swipeConfiguration
     }
-    
-    
-    override func tableView
-        (_ tableView: UITableView,
-         leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+
+    override func tableView(_ tableView: UITableView,
+                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
             
-            let checkInAction = UIContextualAction(style: .normal, title: "Check In") {
-                (action, sourceView, completionHandler) in
+            let checkInAction = UIContextualAction(style: .normal, title: "Check In") { (_, _, completionHandler) in
                 // check-in
-                let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+                guard let cell = tableView.cellForRow(at: indexPath)
+                    as? RestaurantTableViewCell else {
+                        print("error with check-in")
+                        return
+                }
                 self.restaurants[indexPath.row].isVisited = (self.restaurants[indexPath.row].isVisited) ? false : true
                 cell.heartImageView.isHidden = self.restaurants[indexPath.row].isVisited ? false : true
                 
@@ -137,13 +139,15 @@ class RestaurantTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! RestaurantDetailViewController
+                guard let destinationController = segue.destination as? RestaurantDetailViewController else {
+                    print("segue error")
+                    return
+                }
                 destinationController.restaurant = restaurants[indexPath.row]
             }
         }
     }
-    
-    
+
     // MARK: - View controller life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
