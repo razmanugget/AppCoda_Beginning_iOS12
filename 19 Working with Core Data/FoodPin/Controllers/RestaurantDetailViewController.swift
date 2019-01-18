@@ -12,10 +12,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     
     // MARK: - Variables
     var restaurant: RestaurantMO!
-    
+
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
-    
+
     @IBAction func close(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
@@ -42,7 +42,6 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
             }
         })
     }
-    
     // MARK: - Functions
 
     // MARK: - UITableViewDataSource Protocol
@@ -50,13 +49,11 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         -> Int {
             return 1
     }
-    
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int)
         -> Int {
             return 5
     }
-    
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {

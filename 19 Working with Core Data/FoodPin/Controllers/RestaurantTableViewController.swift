@@ -23,6 +23,7 @@ class RestaurantTableViewController: UITableViewController {
     
     // MARK: - Override Functions
     
+    
     // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView)
         -> Int {
