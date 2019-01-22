@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class NewRestaurantController: UITableViewController,
 UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+    var restaurant: RestaurantMO!
+
     // MARK: - IBOutlets
-    
     @IBOutlet var nameTextField: RoundedTextField! {
         didSet {
             nameTextField.tag = 1
@@ -71,7 +72,31 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         print("Location: \(addressTextField.text ?? "")")
         print("Phone: \(phoneTextField.text ?? "")")
         print("Description: \(descriptionTextView.text ?? "")")
-        
+
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let request: NSFetchRequest<RestaurantMO> = RestaurantMO.fetchRequest()
+            let context = appDelegate.persistentContainer.viewContext
+            do {
+                restaurants = try context.fetch(request)
+            } catch {
+                print(error)
+            }
+            restaurant = RestaurantMO(context: AppDelegate.persistentContainer.viewContext)
+            restaurant.name = nameTextField.text
+            restaurant.type = typeTextField.text
+            restaurant.location = addressTextField.text
+            restaurant.phone = phoneTextField.text
+            restaurant.summary = descriptionTextView.text
+            restaurant.isVisited = false
+
+            if let restaurantImage = photoImageView.image {
+                restaurant.image = restaurantImage.pngData()
+            }
+
+            print("Saving data to context ...")
+            appDelegate.saveContext()
+        }
+
         dismiss(animated: true, completion: nil)
     }
 

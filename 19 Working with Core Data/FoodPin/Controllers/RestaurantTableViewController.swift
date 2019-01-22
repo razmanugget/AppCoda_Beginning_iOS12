@@ -7,18 +7,23 @@
 //
 
 import UIKit
+import CoreData
 
 // MARK: - Enums | Extensions
 // MARK: - IBActions
 
-class RestaurantTableViewController: UITableViewController {
+class RestaurantTableViewController:
+    UITableViewController, NSFetchedResultsControllerDelegate {
     // MARK: - Variables
     var restaurants: [RestaurantMO] = []
+    var fetchResultController: NSFetchedResultsController<RestaurantMO>!
 
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
-    
+
+    @IBOutlet var emptyRestaurantView: UIView!
+
     // MARK: - Functions
     
     // MARK: - Override Functions
@@ -26,6 +31,14 @@ class RestaurantTableViewController: UITableViewController {
     // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView)
         -> Int {
+            if restaurants.isEmpty {
+                tableView.backgroundView?.isHidden = false
+                tableView.separatorStyle = .none
+            } else {
+                tableView.backgroundView?.isHidden = true
+                tableView.separatorStyle = .singleLine
+            }
+
             return 1  // this is the default value
     }
     
@@ -171,10 +184,34 @@ class RestaurantTableViewController: UITableViewController {
                 NSAttributedString.Key.font: customFont
             ]
         }
+
+        // prepare the empty view
+        tableView.backgroundView = emptyRestaurantView
+        tableView.backgroundView?.isHidden = true
         
         tableView.separatorStyle = .none
         
         // adjust width on iPad only
         tableView.cellLayoutMarginsFollowReadableWidth = true
+
+        // fetch data from data store
+        let fetchRequest: NSFetchRequest<RestaurantMO> = RestaurantMO.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+fetchRequestController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+
+            do {
+                try fetchResultController.performFetch()
+                if let fetchedObjects = fetchResultController.fetchedObjects {
+                    restaurants = fetchedObjects
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
 }

@@ -109,8 +109,30 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emptyRestaurantView" destination="sSu-YE-6iO" id="4X3-co-34k"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hn1-de-Pc5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="lCx-9I-Ill">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="sSu-YE-6iO">
+                            <rect key="frame" x="28" y="100" width="319" height="355"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="sSu-YE-6iO" secondAttribute="height" multiplier="80:89" id="g3y-ju-1L8"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="sSu-YE-6iO" firstAttribute="leading" secondItem="lCx-9I-Ill" secondAttribute="leading" constant="28" id="M59-Qt-9vI"/>
+                        <constraint firstAttribute="trailing" secondItem="sSu-YE-6iO" secondAttribute="trailing" constant="28" id="bZ9-eC-rmX"/>
+                        <constraint firstItem="sSu-YE-6iO" firstAttribute="top" secondItem="lCx-9I-Ill" secondAttribute="top" constant="100" id="fDK-t4-V9i"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="lkB-VY-IPe"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="1250.7246376811595" y="71.651785714285708"/>
         </scene>
@@ -805,6 +827,7 @@
         <image name="close" width="16" height="16"/>
         <image name="cool" width="78" height="83"/>
         <image name="cross" width="33" height="32"/>
+        <image name="empty" width="310" height="372"/>
         <image name="happy" width="78" height="86"/>
         <image name="heart-tick" width="22" height="21"/>
         <image name="love" width="78" height="82"/>
