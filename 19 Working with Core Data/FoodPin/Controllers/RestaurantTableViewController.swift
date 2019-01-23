@@ -12,8 +12,8 @@ import CoreData
 // MARK: - Enums | Extensions
 // MARK: - IBActions
 
-class RestaurantTableViewController:
-    UITableViewController, NSFetchedResultsControllerDelegate {
+class RestaurantTableViewController: UITableViewController,
+NSFetchedResultsControllerDelegate {
     // MARK: - Variables
     var restaurants: [RestaurantMO] = []
     var fetchResultController: NSFetchedResultsController<RestaurantMO>!
@@ -25,6 +25,57 @@ class RestaurantTableViewController:
     @IBOutlet var emptyRestaurantView: UIView!
 
     // MARK: - Functions
+
+    // MARK: - NSFetchedResultsControllerDelegate methods
+
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?
+        ) {
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        default:
+            tableView.reloadData()
+        }
+
+//        if let fetchedObjects = controller.fetchedObjects {
+//            restaurants = fetchedObjects as! [RestaurantMO]
+//        }
+
+        guard let fetchedObjects = controller.fetchedObjects {
+            restaurants = fetchedObjects as? [RestaurantMO]
+        } else {
+            print("error with fetching")
+            return
+        }
+    }
+
+//    guard let cell = tableView.cellForRow(at: indexPath)
+//        as? RestaurantTableViewCell else {
+//    print("error with check-in")
+//    return
+//    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
     
     // MARK: - Override Functions
     
@@ -201,7 +252,13 @@ class RestaurantTableViewController:
 
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let context = appDelegate.persistentContainer.viewContext
-fetchRequestController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController = NSFetchedResultsController(
+                fetchRequest: fetchRequest,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+
             fetchResultController.delegate = self
 
             do {
