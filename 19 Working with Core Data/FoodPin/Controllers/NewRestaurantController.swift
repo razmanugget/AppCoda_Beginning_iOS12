@@ -74,14 +74,8 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         print("Description: \(descriptionTextView.text ?? "")")
 
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let request: NSFetchRequest<RestaurantMO> = RestaurantMO.fetchRequest()
-            let context = appDelegate.persistentContainer.viewContext
-            do {
-                restaurants = try context.fetch(request)
-            } catch {
-                print(error)
-            }
-            restaurant = RestaurantMO(context: AppDelegate.persistentContainer.viewContext)
+
+            restaurant = RestaurantMO(context: appDelegate.persistentContainer.viewContext)
             restaurant.name = nameTextField.text
             restaurant.type = typeTextField.text
             restaurant.location = addressTextField.text
