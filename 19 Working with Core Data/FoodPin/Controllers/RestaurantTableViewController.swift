@@ -55,23 +55,13 @@ NSFetchedResultsControllerDelegate {
             tableView.reloadData()
         }
 
-//        if let fetchedObjects = controller.fetchedObjects {
-//            restaurants = fetchedObjects as! [RestaurantMO]
-//        }
-
-        guard let fetchedObjects = controller.fetchedObjects {
-            restaurants = fetchedObjects as? [RestaurantMO]
-        } else {
-            print("error with fetching")
-            return
+        if let fetchedObjects = controller.fetchedObjects {
+            guard let restaurants = fetchedObjects as? [RestaurantMO] else {
+                print("error with fetching")
+                return
+            }
         }
     }
-
-//    guard let cell = tableView.cellForRow(at: indexPath)
-//        as? RestaurantTableViewCell else {
-//    print("error with check-in")
-//    return
-//    }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
