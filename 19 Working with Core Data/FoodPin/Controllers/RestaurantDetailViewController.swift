@@ -19,6 +19,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     @IBAction func close(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
+
     @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: {
             if let rating = segue.identifier {
@@ -49,11 +50,13 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         -> Int {
             return 1
     }
+
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int)
         -> Int {
             return 5
     }
+
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
