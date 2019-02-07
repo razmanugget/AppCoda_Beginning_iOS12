@@ -130,7 +130,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             photoImageView.image = selectedImage
             photoImageView.contentMode = .scaleAspectFill
-            photoImageView.clipsToBounds = false
+            photoImageView.clipsToBounds = true
         }
         
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
