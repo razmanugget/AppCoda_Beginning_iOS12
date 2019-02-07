@@ -17,6 +17,8 @@ class Restaurant {
     var image: String
     var isVisited: Bool
     var rating: String
+    var managedObject: RestaurantMO?
+
     init(name: String,
          type: String,
          location: String,

@@ -56,7 +56,7 @@ NSFetchedResultsControllerDelegate {
         }
 
         if let fetchedObjects = controller.fetchedObjects {
-            guard let restaurants = fetchedObjects as? [RestaurantMO] else {
+            guard fetchedObjects is [RestaurantMO] else {
                 print("error with fetching")
                 return
             }
