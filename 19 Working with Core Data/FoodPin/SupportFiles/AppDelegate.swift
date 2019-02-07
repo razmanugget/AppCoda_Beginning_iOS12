@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          error conditions that could cause the creation of the store to fail.
          */
         let container = NSPersistentContainer(name: "FoodPin")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                         // swiftlint:disable:next line_length
