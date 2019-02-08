@@ -56,10 +56,8 @@ NSFetchedResultsControllerDelegate {
         }
 
         if let fetchedObjects = controller.fetchedObjects {
-            guard fetchedObjects is [RestaurantMO] else {
-                print("error with fetching")
-                return
-            }
+            // swiftlint:disable force_cast
+            restaurants = fetchedObjects as! [RestaurantMO]
         }
     }
 
