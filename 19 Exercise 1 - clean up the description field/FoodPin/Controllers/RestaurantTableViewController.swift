@@ -56,10 +56,8 @@ NSFetchedResultsControllerDelegate {
         }
 
         if let fetchedObjects = controller.fetchedObjects {
-            guard let restaurants = fetchedObjects as? [RestaurantMO] else {
-                print("error with fetching")
-                return
-            }
+            // swiftlint:disable force_cast
+            restaurants = fetchedObjects as! [RestaurantMO]
         }
     }
 
@@ -72,12 +70,12 @@ NSFetchedResultsControllerDelegate {
     // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView)
         -> Int {
-            if restaurants.isEmpty {
-                tableView.backgroundView?.isHidden = false
-                tableView.separatorStyle = .none
-            } else {
+            if restaurants.count >= 1 {
                 tableView.backgroundView?.isHidden = true
                 tableView.separatorStyle = .singleLine
+            } else {
+                tableView.backgroundView?.isHidden = false
+                tableView.separatorStyle = .none
             }
 
             return 1  // this is the default value
