@@ -149,10 +149,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         // show nav bar just for this scene
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -160,7 +160,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // customize nav bar
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -168,12 +168,12 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         navigationController?.navigationBar.tintColor = .white
         // keeps the nav bar from blocking the top content (default is .always)
         tableView.contentInsetAdjustmentBehavior = .never
-        
+
         // link data
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        
+
         // configure header view
         if let restaurantImage = restaurant.image {
             headerView.headerImageView.image = UIImage(data: restaurantImage as Data)

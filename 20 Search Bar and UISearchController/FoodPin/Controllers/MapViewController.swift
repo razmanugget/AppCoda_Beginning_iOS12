@@ -29,17 +29,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             var annotationView: MKMarkerAnnotationView? =
                 mapView.dequeueReusableAnnotationView(
                     withIdentifier: identifier) as? MKMarkerAnnotationView
-            
+
             if annotationView == nil {
                 annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             }
-            
+
             annotationView?.glyphText = "😋"
             annotationView?.markerTintColor = UIColor.orange
-            
+
             return annotationView
     }
-    
+
     // MARK: - View controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.showsCompass = true
         mapView.showsScale = true
         mapView.showsTraffic = true
-        
+
         // Convert address to coordinate and annotate it on map
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(restaurant.location ?? "", completionHandler: { placemarks, error in

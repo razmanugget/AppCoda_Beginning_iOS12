@@ -13,10 +13,12 @@ import CoreData
 // MARK: - IBActions
 
 class RestaurantTableViewController: UITableViewController,
-NSFetchedResultsControllerDelegate {
+NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     // MARK: - Variables
     var restaurants: [RestaurantMO] = []
     var fetchResultController: NSFetchedResultsController<RestaurantMO>!
+    var searchController: UISearchController!
+    var searchResults: [RestaurantMO] = []
 
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
@@ -64,9 +66,27 @@ NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-    
+
+    // using filter closure to return matches
+    func filterContent(for searchText: String) {
+        searchResults = restaurants.filter({ (restaurant) -> Bool in
+            if let name = restaurant.name {
+                let isMatch = name.localizedCaseInsensitiveContains(searchText)
+                return isMatch
+            }
+            return false
+        })
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContent(for: searchText)
+            tableView.reloadData()
+        }
+    }
+
     // MARK: - Override Functions
-    
+
     // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView)
         -> Int {
@@ -80,13 +100,13 @@ NSFetchedResultsControllerDelegate {
 
             return 1  // this is the default value
     }
-    
+
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int)
         -> Int {
             return restaurants.count
     }
-    
+
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
@@ -104,16 +124,16 @@ NSFetchedResultsControllerDelegate {
             cell.locationLabel.text = restaurants[indexPath.row].location
             cell.typeLabel.text = restaurants[indexPath.row].type
             cell.heartImageView.isHidden = restaurants[indexPath.row].isVisited ? false : true
-            
+
             return cell
     }
-    
+
     // MARK: - TableView actions
-    
+
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
-            
+
             let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
                 // delete the row from the data source
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -127,7 +147,7 @@ NSFetchedResultsControllerDelegate {
                 // call completion handler to dismiss the action button
                 completionHandler(true)
             }
-            
+
             let shareAction = UIContextualAction(style: .normal, title: "Share") { (_, sourceView, completionHandler) in
                 let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name!
                 let activityController: UIActivityViewController
@@ -140,7 +160,7 @@ NSFetchedResultsControllerDelegate {
                     activityController = UIActivityViewController(
                         activityItems: [defaultText], applicationActivities: nil)
                 }
-                
+
                 // fix for iPad
                 if let popoverController = activityController.popoverPresentationController {
                     if let cell = tableView.cellForRow(at: indexPath) {
@@ -157,7 +177,7 @@ NSFetchedResultsControllerDelegate {
             deleteAction.image = UIImage(named: "delete")
             shareAction.backgroundColor = UIColor.orange   // simple color
             shareAction.image = UIImage(named: "share")
-            
+
             // show the options
             let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
             return swipeConfiguration
@@ -166,7 +186,7 @@ NSFetchedResultsControllerDelegate {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
-            
+
             let checkInAction = UIContextualAction(style: .normal, title: "Check In") { (_, _, completionHandler) in
                 // check-in
                 guard let cell = tableView.cellForRow(at: indexPath)
@@ -176,11 +196,11 @@ NSFetchedResultsControllerDelegate {
                 }
                 self.restaurants[indexPath.row].isVisited = (self.restaurants[indexPath.row].isVisited) ? false : true
                 cell.heartImageView.isHidden = self.restaurants[indexPath.row].isVisited ? false : true
-                
+
                 // call completion handler to dismiss the action button
                 completionHandler(true)
             }
-            
+
             // color the options
             let checkInIcon = restaurants[indexPath.row].isVisited ? "undo" : "tick"
             // using the extension here for simplier color choice
@@ -191,7 +211,7 @@ NSFetchedResultsControllerDelegate {
             let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkInAction])
             return swipeConfiguration
     }
-    
+
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRestaurantDetail" {
@@ -208,20 +228,22 @@ NSFetchedResultsControllerDelegate {
     // MARK: - View controller life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         // hide nav bar just for this scene
         navigationController?.hidesBarsOnSwipe = true
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //nav bar customization
         navigationController?.navigationBar.prefersLargeTitles = true
         // to make background transparent, set image and shadow to blank UIImage
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        
+        searchController = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController = searchController
+
         if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
             navigationController?.navigationBar.largeTitleTextAttributes = [
                 NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60),
@@ -232,9 +254,9 @@ NSFetchedResultsControllerDelegate {
         // prepare the empty view
         tableView.backgroundView = emptyRestaurantView
         tableView.backgroundView?.isHidden = true
-        
+
         tableView.separatorStyle = .none
-        
+
         // adjust width on iPad only
         tableView.cellLayoutMarginsFollowReadableWidth = true
 
@@ -263,5 +285,6 @@ NSFetchedResultsControllerDelegate {
                 print(error)
             }
         }
+
     }
 }

@@ -28,21 +28,21 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             typeTextField.delegate = self
         }
     }
-    
+
     @IBOutlet var addressTextField: RoundedTextField! {
         didSet {
             addressTextField.tag = 3
             addressTextField.delegate = self
         }
     }
-    
+
     @IBOutlet var phoneTextField: RoundedTextField! {
         didSet {
             phoneTextField.tag = 4
             phoneTextField.delegate = self
         }
     }
-    
+
     @IBOutlet var descriptionTextView: UITextView! {
         didSet {
             descriptionTextView.tag = 5
@@ -50,12 +50,12 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             descriptionTextView.layer.masksToBounds = true
         }
     }
-    
+
     @IBOutlet var photoImageView: UIImageView!
 
     @IBAction func saveButtonTapped(sender: AnyObject) {
         let errorType = self.validateInput()
-        
+
         if errorType.isEmpty {
             let alertController =
                 UIAlertController(title: "Oops", message:
@@ -64,7 +64,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion: nil)
-            
+
             return
         }
         print("Name: \(nameTextField.text ?? "")")
@@ -95,7 +95,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
 
     // MARK: - UITextFieldDelegate methods
-    
+
     func textFieldShouldReturn(_ textField: UITextField)
         -> Bool {
 
@@ -121,18 +121,18 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         }
         return error
     }
-    
+
     // MARK: - UIImagePickerControllerDelegate methods
-    
+
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        
+
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             photoImageView.image = selectedImage
             photoImageView.contentMode = .scaleAspectFill
             photoImageView.clipsToBounds = true
         }
-        
+
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
 
         // I use `photoImageView.superview!` below because I don't know the exact context.
@@ -145,7 +145,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
 
     // MARK: - UITableViewDelegate methods
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             let photoSourceRequestController = UIAlertController(
@@ -171,7 +171,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             })
             photoSourceRequestController.addAction(cameraAction)
             photoSourceRequestController.addAction(photoLibraryAction)
-            
+
             // for ipad
             if let popoverController = photoSourceRequestController.popoverPresentationController {
                 if let cell = tableView.cellForRow(at: indexPath) {
@@ -185,9 +185,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.separatorStyle = .none
-        
+
         // Configure navigation bar appearance
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
