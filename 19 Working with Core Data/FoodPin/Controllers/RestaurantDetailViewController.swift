@@ -178,6 +178,9 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         if let restaurantImage = restaurant.image {
             headerView.headerImageView.image = UIImage(data: restaurantImage as Data)
         }
+        if let rating = restaurant.rating {
+            headerView.ratingImageView.image = UIImage(named: rating)
+        }
         headerView.nameLabel.text = restaurant.name
         headerView.typeLabel.text = restaurant.type
         headerView.backgroundTypeLabel.text = "   " + restaurant.type! + "   "
