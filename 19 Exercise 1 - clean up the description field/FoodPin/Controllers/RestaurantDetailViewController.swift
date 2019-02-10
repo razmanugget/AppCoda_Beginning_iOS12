@@ -25,7 +25,12 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
             if let rating = segue.identifier {
                 self.restaurant.rating = rating
                 self.headerView.ratingImageView.image = UIImage(named: rating)
-                
+
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate
+                    ) {
+                    appDelegate.saveContext()
+                }
+
                 let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
                 self.headerView.ratingImageView.transform = scaleTransform
                 self.headerView.ratingImageView.alpha = 0
@@ -92,7 +97,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
                         print("error pulling description")
                         return UITableViewCell()
                 }
-                cell.descriptionLabel.text = restaurant.description
+                cell.descriptionLabel.text = restaurant.summary
                 cell.selectionStyle = .none
                 return cell
             case 3:
