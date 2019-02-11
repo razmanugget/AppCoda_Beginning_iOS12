@@ -104,7 +104,11 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int)
         -> Int {
-            return restaurants.count
+            if searchController.isActive {
+                return searchResults.count
+            } else {
+                return restaurants.count
+            }
     }
 
     override func tableView(_ tableView: UITableView,
