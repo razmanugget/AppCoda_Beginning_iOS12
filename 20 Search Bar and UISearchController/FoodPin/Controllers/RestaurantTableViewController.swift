@@ -121,6 +121,10 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                     print("error removing datacell")
                     return UITableViewCell()
             }
+
+            // determine if we get the restaurant from search result or array
+            let restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
+            // configure the cell
             cell.nameLabel.text = restaurants[indexPath.row].name
             if let restaurantImage = restaurants[indexPath.row].image {
                 cell.thumbnailImageView.image = UIImage(data: restaurantImage as Data)
@@ -216,6 +220,14 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             return swipeConfiguration
     }
 
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if searchController.isActive {
+            return false
+        } else {
+            return true
+        }
+    }
+
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRestaurantDetail" {
@@ -224,7 +236,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                     print("segue error")
                     return
                 }
-                destinationController.restaurant = restaurants[indexPath.row]
+                destinationController.restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
             }
         }
     }
@@ -246,7 +258,10 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         searchController = UISearchController(searchResultsController: nil)
-        self.navigationItem.searchController = searchController
+        // places search in the nav bar
+        //        self.navigationItem.searchController = searchController
+        // places search in the table view header
+        tableView.tableHeaderView = searchController.searchBar
 
         if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
             navigationController?.navigationBar.largeTitleTextAttributes = [
@@ -290,5 +305,11 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             }
         }
 
+        // search results update
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search restaurants..."
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.tintColor = UIColor(red: 231, green: 76, blue: 60)
     }
 }
