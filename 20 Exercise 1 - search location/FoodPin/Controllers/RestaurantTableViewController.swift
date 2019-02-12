@@ -66,12 +66,15 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-
+    
     // using filter closure to return matches
     func filterContent(for searchText: String) {
         searchResults = restaurants.filter({ (restaurant) -> Bool in
-            if let name = restaurant.name {
-                let isMatch = name.localizedCaseInsensitiveContains(searchText)
+            if let name = restaurant.name,
+                let location = restaurant.location {
+                
+                let isMatch = name.localizedCaseInsensitiveContains(searchText) || 
+                    location.localizedCaseInsensitiveContains(searchText)
                 return isMatch
             }
             return false
@@ -125,14 +128,14 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             // determine if we get the restaurant from search result or array
             let restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
             // configure the cell
-            cell.nameLabel.text = restaurants[indexPath.row].name
-            if let restaurantImage = restaurants[indexPath.row].image {
+            cell.nameLabel.text = restaurant.name
+            if let restaurantImage = restaurant.image {
                 cell.thumbnailImageView.image = UIImage(data: restaurantImage as Data)
             }
-            cell.locationLabel.text = restaurants[indexPath.row].location
-            cell.typeLabel.text = restaurants[indexPath.row].type
-            cell.heartImageView.isHidden = restaurants[indexPath.row].isVisited ? false : true
-
+            cell.locationLabel.text = restaurant.location
+            cell.typeLabel.text = restaurant.type
+            cell.heartImageView.isHidden = restaurant.isVisited ? false : true
+            
             return cell
     }
 
@@ -236,7 +239,8 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                     print("segue error")
                     return
                 }
-                destinationController.restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
+                destinationController.restaurant = (searchController.isActive) ? 
+                    searchResults[indexPath.row] : restaurants[indexPath.row]
             }
         }
     }
@@ -257,12 +261,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         // to make background transparent, set image and shadow to blank UIImage
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        searchController = UISearchController(searchResultsController: nil)
-        // places search in the nav bar
-        //        self.navigationItem.searchController = searchController
-        // places search in the table view header
-        tableView.tableHeaderView = searchController.searchBar
-
+        
         if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
             navigationController?.navigationBar.largeTitleTextAttributes = [
                 NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60),
@@ -273,7 +272,6 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         // prepare the empty view
         tableView.backgroundView = emptyRestaurantView
         tableView.backgroundView?.isHidden = true
-
         tableView.separatorStyle = .none
 
         // adjust width on iPad only
@@ -306,6 +304,11 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         }
 
         // search results update
+        searchController = UISearchController(searchResultsController: nil)
+        // places search in the nav bar
+        //        self.navigationItem.searchController = searchController
+        // places search in the table view header
+        tableView.tableHeaderView = searchController.searchBar
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search restaurants..."
