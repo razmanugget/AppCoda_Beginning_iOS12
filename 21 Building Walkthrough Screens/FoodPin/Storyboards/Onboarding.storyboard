@@ -146,9 +146,9 @@
                     </view>
                     <size key="freeformSize" width="375" height="451"/>
                     <connections>
-                        <outlet property="contentImageView" destination="FnT-tV-jmT" id="nRH-6W-IDf"/>
-                        <outlet property="headingLabel" destination="iLA-kD-3Wx" id="Gq5-UT-SE2"/>
-                        <outlet property="subHeadingLabel" destination="Teg-Nl-H1y" id="7bc-M6-Lbx"/>
+                        <outlet property="contentImageView" destination="FnT-tV-jmT" id="s3R-ab-Xkc"/>
+                        <outlet property="headingLabel" destination="iLA-kD-3Wx" id="iq3-CR-y8p"/>
+                        <outlet property="subHeadingLabel" destination="Teg-Nl-H1y" id="ICO-dd-6ua"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OoA-g0-Jri" userLabel="First Responder" sceneMemberID="firstResponder"/>
