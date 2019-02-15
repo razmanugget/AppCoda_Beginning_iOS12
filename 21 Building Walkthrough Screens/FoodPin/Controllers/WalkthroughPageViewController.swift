@@ -27,11 +27,11 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
     ]
     var currentIndex = 0
     
-    
     func pageViewController(
         _ pageViewController: UIPageViewController, 
         viewControllerBefore viewController: UIViewController) 
         -> UIViewController? {
+             // swiftlint:disable:next force_cast
             var index = (viewController as! WalkthroughContentViewController).index
             index -= 1
             
@@ -42,6 +42,7 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
         _ pageViewController: UIPageViewController, 
         viewControllerAfter viewController: UIViewController) 
         -> UIViewController? {
+             // swiftlint:disable:next force_cast
             var index = (viewController as! WalkthroughContentViewController).index
             index += 1
             
@@ -56,7 +57,8 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
             
             // create a new view controller and pass data
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-            if let pageContentViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughContentViewController") as? WalkthroughContentViewController {
+            if let pageContentViewController = storyboard.instantiateViewController(
+                withIdentifier: "WalkthroughContentViewController") as? WalkthroughContentViewController {
                 pageContentViewController.imageFile = pageImages[index]
                 pageContentViewController.heading = pageHeadings[index]
                 pageContentViewController.subHeading = pageSubHeadings[index]
@@ -64,6 +66,13 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
                 return pageContentViewController
             }
             return nil
+    }
+    
+    func forwardPage() {
+        currentIndex += 1
+        if let nextViewController = contentViewController(at: currentIndex) {
+            setViewControllers([nextViewController], direction: .forward, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {

@@ -29,7 +29,6 @@ class WalkthroughContentViewController: UIViewController {
     var subHeading = ""
     var imageFile = ""
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

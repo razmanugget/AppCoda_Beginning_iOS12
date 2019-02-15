@@ -252,7 +252,15 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         // hide nav bar just for this scene
         navigationController?.hidesBarsOnSwipe = true
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        if let walkthroughViewController = storyboard.instantiateViewController(
+            withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+            present(walkthroughViewController, animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
