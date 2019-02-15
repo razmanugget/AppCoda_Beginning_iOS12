@@ -29,17 +29,21 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     // MARK: - Functions
 
     // MARK: - NSFetchedResultsControllerDelegate methods
-
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    
+    func controllerWillChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
         tableView.beginUpdates()
     }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?
+    
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
         ) {
+        
         switch type {
         case .insert:
             if let newIndexPath = newIndexPath {
@@ -62,13 +66,17 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             restaurants = fetchedObjects as! [RestaurantMO]
         }
     }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    
+    func controllerDidChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
         tableView.endUpdates()
     }
     
     // using filter closure to return matches
-    func filterContent(for searchText: String) {
+    func filterContent(
+        for searchText: String) {
+        
         searchResults = restaurants.filter({ (restaurant) -> Bool in
             if let name = restaurant.name,
                 let location = restaurant.location {
@@ -81,7 +89,9 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         })
     }
 
-    func updateSearchResults(for searchController: UISearchController) {
+    func updateSearchResults(
+        for searchController: UISearchController) {
+        
         if let searchText = searchController.searchBar.text {
             filterContent(for: searchText)
             tableView.reloadData()
@@ -89,10 +99,12 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     }
 
     // MARK: - Override Functions
-
+    
     // MARK: - UITableViewDataSource
-    override func numberOfSections(in tableView: UITableView)
+    override func numberOfSections(
+        in tableView: UITableView)
         -> Int {
+            
             if restaurants.count >= 1 {
                 tableView.backgroundView?.isHidden = true
                 tableView.separatorStyle = .singleLine
@@ -103,21 +115,24 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
 
             return 1  // this is the default value
     }
-
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int)
+    
+    override func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int)
         -> Int {
+            
             if searchController.isActive {
                 return searchResults.count
             } else {
                 return restaurants.count
             }
     }
-
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath)
+    
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
-
+            
             let cellIdentifier = "datacell"
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 as? RestaurantTableViewCell else {
@@ -140,12 +155,14 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     }
 
     // MARK: - TableView actions
-
-    override func tableView(_ tableView: UITableView,
-                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    
+    override func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
-
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
+            
+            let deleteAction = UIContextualAction(
+            style: .destructive, title: "Delete") { (_, _, completionHandler) in
                 // delete the row from the data source
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                     let context = appDelegate.persistentContainer.viewContext
@@ -158,8 +175,9 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                 // call completion handler to dismiss the action button
                 completionHandler(true)
             }
-
-            let shareAction = UIContextualAction(style: .normal, title: "Share") { (_, sourceView, completionHandler) in
+            
+            let shareAction = UIContextualAction(
+            style: .normal, title: "Share") { (_, sourceView, completionHandler) in
                 let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name!
                 let activityController: UIActivityViewController
                 
@@ -193,11 +211,12 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
             return swipeConfiguration
     }
-
-    override func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    
+    override func tableView(
+        _ tableView: UITableView,
+        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
-
+            
             let checkInAction = UIContextualAction(style: .normal, title: "Check In") { (_, _, completionHandler) in
                 // check-in
                 guard let cell = tableView.cellForRow(at: indexPath)
@@ -222,17 +241,22 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkInAction])
             return swipeConfiguration
     }
-
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if searchController.isActive {
-            return false
-        } else {
-            return true
-        }
+    
+    override func tableView(
+        _ tableView: UITableView, canEditRowAt indexPath: IndexPath) 
+        -> Bool {
+            
+            if searchController.isActive {
+                return false
+            } else {
+                return true
+            }
     }
-
+    
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(
+        for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 guard let destinationController = segue.destination as? RestaurantDetailViewController else {
@@ -246,14 +270,17 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     }
 
     // MARK: - View controller life cycle
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(
+        _ animated: Bool) {
+        
         super.viewWillAppear(animated)
-
         // hide nav bar just for this scene
         navigationController?.hidesBarsOnSwipe = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(
+        _ animated: Bool) {
+        
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if let walkthroughViewController = storyboard.instantiateViewController(
             withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {

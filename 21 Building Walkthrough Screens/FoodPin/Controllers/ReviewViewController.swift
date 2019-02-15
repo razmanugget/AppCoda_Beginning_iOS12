@@ -9,14 +9,17 @@
 import UIKit
 
 class ReviewViewController: UIViewController {
+    // MARK: - Variables
     var restaurant: RestaurantMO!
-
+    
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var rateButtons: [UIButton]!
     @IBOutlet var closeButton: UIButton!
-
+    
     // MARK: - View controller life cycle
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(
+        _ animated: Bool) {
+        
         // appear flowing down
         for rateButton in 0...4 {
             let timeDelay = (Double(rateButton) * 0.05) + 0.1

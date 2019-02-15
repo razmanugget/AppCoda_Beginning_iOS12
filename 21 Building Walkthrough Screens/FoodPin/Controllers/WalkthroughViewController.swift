@@ -8,9 +8,11 @@
 
 import UIKit
 
-class WalkthroughViewController: UIViewController {
+class WalkthroughViewController: UIViewController, 
+WalkthroughPageViewControllerDelegate {
+    // MARK: - Variables
     var walkthroughPageViewController: WalkthroughPageViewController?
-
+    
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var nextButton: UIButton! {
         didSet {
@@ -24,7 +26,9 @@ class WalkthroughViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func nextButtonTapped(sender: UIButton) {
+    @IBAction func nextButtonTapped(
+        sender: UIButton) {
+        
         if let index = walkthroughPageViewController?.currentIndex {
             switch index {
             case 0...1:
@@ -54,10 +58,18 @@ class WalkthroughViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func didUpdatePageIndex(currentIndex: Int) {
+        updateUI()
+    }
+    
+    override func prepare(
+        for segue: UIStoryboardSegue, sender: Any?) {
+        
         let destination = segue.destination
         if let pageViewController = destination as? WalkthroughPageViewController {
             walkthroughPageViewController = pageViewController
+            
+            walkthroughPageViewController?.walkthroughDelegate = self
         }
     }
     
@@ -66,15 +78,4 @@ class WalkthroughViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

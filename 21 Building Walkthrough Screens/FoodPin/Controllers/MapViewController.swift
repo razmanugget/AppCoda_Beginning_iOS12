@@ -9,18 +9,22 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, 
+MKMapViewDelegate {
+    // MARK: - Variables
     var restaurant: RestaurantMO!
-
+    
     @IBOutlet var mapView: MKMapView!
-
+    
     // MARK: - MKMapViewDelegate methods
 
-    func mapView(_ mapView: MKMapView,
-                 viewFor annotation: MKAnnotation)
+    func mapView(
+        _ mapView: MKMapView,
+        viewFor annotation: MKAnnotation)
         -> MKAnnotationView? {
+            
             let identifier = "MyMarker"
-
+            
             if annotation.isKind(of: MKUserLocation.self) {
                 return nil
             }

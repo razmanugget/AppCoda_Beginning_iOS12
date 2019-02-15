@@ -8,8 +8,13 @@
 
 import UIKit
 
-class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerDataSource {
-    
+protocol WalkthroughPageViewControllerDelegate: class {
+    func didUpdatePageIndex(currentIndex: Int)
+}
+
+class WalkthroughPageViewController: UIPageViewController, 
+UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    // MARK: - Variables
     var pageHeadings = [
         "Create your own food guide", 
         "Show you the location", 
@@ -26,12 +31,15 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
         "Find restaurants shared by your friends and other foodies"
     ]
     var currentIndex = 0
+    weak var walkthroughDelegate: WalkthroughPageViewControllerDelegate?
     
+    // MARK: - functions
     func pageViewController(
         _ pageViewController: UIPageViewController, 
         viewControllerBefore viewController: UIViewController) 
         -> UIViewController? {
-             // swiftlint:disable:next force_cast
+            
+            // swiftlint:disable:next force_cast
             var index = (viewController as! WalkthroughContentViewController).index
             index -= 1
             
@@ -42,15 +50,18 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
         _ pageViewController: UIPageViewController, 
         viewControllerAfter viewController: UIViewController) 
         -> UIViewController? {
-             // swiftlint:disable:next force_cast
+            
+            // swiftlint:disable:next force_cast
             var index = (viewController as! WalkthroughContentViewController).index
             index += 1
             
             return contentViewController(at: index)
     }
     
-    func contentViewController(at index: Int) 
+    func contentViewController(
+        at index: Int) 
         -> WalkthroughContentViewController? {
+            
             if index < 0 || index >= pageHeadings.count {
                 return nil
             }
@@ -69,9 +80,26 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
     }
     
     func forwardPage() {
+        
         currentIndex += 1
         if let nextViewController = contentViewController(at: currentIndex) {
             setViewControllers([nextViewController], direction: .forward, animated: true, completion: nil)
+        }
+    }
+    
+    func pageViewController(
+        _ pageViewController: UIPageViewController, 
+        didFinishAnimating finished: Bool, 
+        previousViewControllers: [UIViewController], 
+        transitionCompleted completed: Bool) {
+        
+        if completed {
+            if let contentViewController = pageViewController.viewControllers?.first as?
+                WalkthroughContentViewController {
+                currentIndex = contentViewController.index
+                
+                walkthroughDelegate?.didUpdatePageIndex(currentIndex: contentViewController.index)
+            }
         }
     }
     
@@ -80,6 +108,7 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
           
         // set the data source to itself
         dataSource = self
+        delegate = self
         
         // create the first walkthrough screen
         if let startingViewController = contentViewController(at: 0) {

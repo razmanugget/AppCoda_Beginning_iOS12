@@ -11,8 +11,9 @@ import CoreData
 
 class NewRestaurantController: UITableViewController,
 UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // MARK: - Variables
     var restaurant: RestaurantMO!
-
+    
     // MARK: - IBOutlets
     @IBOutlet var nameTextField: RoundedTextField! {
         didSet {
@@ -50,12 +51,14 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             descriptionTextView.layer.masksToBounds = true
         }
     }
-
+    
     @IBOutlet var photoImageView: UIImageView!
-
-    @IBAction func saveButtonTapped(sender: AnyObject) {
+    
+    @IBAction func saveButtonTapped(
+        sender: AnyObject) {
+        
         let errorType = self.validateInput()
-
+        
         if errorType.isEmpty {
             let alertController =
                 UIAlertController(title: "Oops", message:
@@ -95,38 +98,42 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
 
     // MARK: - UITextFieldDelegate methods
-
-    func textFieldShouldReturn(_ textField: UITextField)
+    
+    func textFieldShouldReturn(
+        _ textField: UITextField)
         -> Bool {
-
-        if let nextTextField = view.viewWithTag(textField.tag + 1) {
-            textField.resignFirstResponder()
-            nextTextField.becomeFirstResponder()
-        }
-        return true
+            
+            if let nextTextField = view.viewWithTag(textField.tag + 1) {
+                textField.resignFirstResponder()
+                nextTextField.becomeFirstResponder()
+            }
+            return true
     }
-
-    func validateInput() -> String {
-        var error = ""
-        if let text = nameTextField.text, !text.isEmpty {
-            error = "name"
-        } else if let text = typeTextField.text, !text.isEmpty {
-            error = "type"
-        } else if let text = addressTextField.text, !text.isEmpty {
-            error = "address"
-        } else if let text = phoneTextField.text, !text.isEmpty {
-            error = "phone"
-        } else if let text = descriptionTextView.text, !text.isEmpty {
-            error = "description"
-        }
-        return error
+    
+    func validateInput() 
+        -> String {
+            
+            var error = ""
+            if let text = nameTextField.text, !text.isEmpty {
+                error = "name"
+            } else if let text = typeTextField.text, !text.isEmpty {
+                error = "type"
+            } else if let text = addressTextField.text, !text.isEmpty {
+                error = "address"
+            } else if let text = phoneTextField.text, !text.isEmpty {
+                error = "phone"
+            } else if let text = descriptionTextView.text, !text.isEmpty {
+                error = "description"
+            }
+            return error
     }
 
     // MARK: - UIImagePickerControllerDelegate methods
-
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-
+    
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             photoImageView.image = selectedImage
             photoImageView.contentMode = .scaleAspectFill
@@ -143,10 +150,13 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         photoImageView.bottomAnchor.constraint(equalTo: photoImageView.superview!.bottomAnchor).isActive = true
         dismiss(animated: true, completion: nil)
     }
-
+    
     // MARK: - UITableViewDelegate methods
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    override func tableView(
+        _ tableView: UITableView, 
+        didSelectRowAt indexPath: IndexPath) {
+        
         if indexPath.row == 0 {
             let photoSourceRequestController = UIAlertController(
                 title: "", message: "Choose your photo source",
