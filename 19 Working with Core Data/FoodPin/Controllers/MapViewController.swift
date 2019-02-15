@@ -16,11 +16,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - MKMapViewDelegate methods
 
-    func mapView(_ mapView: MKMapView,
-                 viewFor annotation: MKAnnotation)
+    func mapView(
+        _ mapView: MKMapView,
+        viewFor annotation: MKAnnotation)
         -> MKAnnotationView? {
+            
             let identifier = "MyMarker"
-
+            
             if annotation.isKind(of: MKUserLocation.self) {
                 return nil
             }

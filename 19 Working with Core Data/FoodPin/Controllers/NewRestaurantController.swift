@@ -96,12 +96,13 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 
     // MARK: - UITextFieldDelegate methods
     
-    func textFieldShouldReturn(_ textField: UITextField)
+    func textFieldShouldReturn(
+        _ textField: UITextField)
         -> Bool {
-
-        if let nextTextField = view.viewWithTag(textField.tag + 1) {
-            textField.resignFirstResponder()
-            nextTextField.becomeFirstResponder()
+            
+            if let nextTextField = view.viewWithTag(textField.tag + 1) {
+                textField.resignFirstResponder()
+                nextTextField.becomeFirstResponder()
         }
         return true
     }
@@ -124,8 +125,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     
     // MARK: - UIImagePickerControllerDelegate methods
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             photoImageView.image = selectedImage
@@ -134,7 +136,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         }
         
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         // I use `photoImageView.superview!` below because I don't know the exact context.
         // If photoImageView is child view of viewController.view, you can do just `view.(...)Anchor`
         photoImageView.leadingAnchor.constraint(equalTo: photoImageView.superview!.leadingAnchor).isActive = true
@@ -146,7 +148,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 
     // MARK: - UITableViewDelegate methods
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(
+        _ tableView: UITableView, 
+        didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             let photoSourceRequestController = UIAlertController(
                 title: "", message: "Choose your photo source",

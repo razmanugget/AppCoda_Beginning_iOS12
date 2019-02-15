@@ -20,12 +20,13 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
+    @IBAction func rateRestaurant(
+        segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: {
             if let rating = segue.identifier {
                 self.restaurant.rating = rating
                 self.headerView.ratingImageView.image = UIImage(named: rating)
-
+                
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate
                     ) {
                     appDelegate.saveContext()
@@ -51,21 +52,26 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     // MARK: - Functions
 
     // MARK: - UITableViewDataSource Protocol
-    func numberOfSections(in tableView: UITableView)
+    func numberOfSections(
+        in tableView: UITableView)
         -> Int {
+            
             return 1
     }
-
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int)
+    
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int)
         -> Int {
+            
             return 5
     }
-
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath)
+    
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
-
+            
             switch indexPath.row {
             case 0:
                 // using this version (describing) instead of other will show errors if the cell ID isn't found
@@ -129,7 +135,8 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     }
 
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(
+        for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMap" {
             guard let destinationController = segue.destination as? MapViewController else {
                 print("segue mapview error")

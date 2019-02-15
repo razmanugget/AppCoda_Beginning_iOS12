@@ -28,15 +28,17 @@ NSFetchedResultsControllerDelegate {
 
     // MARK: - NSFetchedResultsControllerDelegate methods
 
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    func controllerWillChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?
+    
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
         ) {
         switch type {
         case .insert:
@@ -61,14 +63,16 @@ NSFetchedResultsControllerDelegate {
         }
     }
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    func controllerDidChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
     
     // MARK: - Override Functions
     
     // MARK: - UITableViewDataSource
-    override func numberOfSections(in tableView: UITableView)
+    override func numberOfSections(
+        in tableView: UITableView)
         -> Int {
             if restaurants.count >= 1 {
                 tableView.backgroundView?.isHidden = true
@@ -81,16 +85,18 @@ NSFetchedResultsControllerDelegate {
             return 1  // this is the default value
     }
     
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int)
+    override func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int)
         -> Int {
             return restaurants.count
     }
     
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath)
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
-
+            
             let cellIdentifier = "datacell"
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 as? RestaurantTableViewCell else {
@@ -110,8 +116,9 @@ NSFetchedResultsControllerDelegate {
     
     // MARK: - TableView actions
     
-    override func tableView(_ tableView: UITableView,
-                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    override func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
             
             let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
@@ -162,9 +169,10 @@ NSFetchedResultsControllerDelegate {
             let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
             return swipeConfiguration
     }
-
-    override func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    
+    override func tableView(
+        _ tableView: UITableView,
+        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
             
             let checkInAction = UIContextualAction(style: .normal, title: "Check In") { (_, _, completionHandler) in
@@ -193,7 +201,9 @@ NSFetchedResultsControllerDelegate {
     }
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(
+        for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 guard let destinationController = segue.destination as? RestaurantDetailViewController else {

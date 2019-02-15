@@ -13,6 +13,7 @@
 		F40C7E3621B2EEC70074D929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F40C7E3521B2EEC70074D929 /* Assets.xcassets */; };
 		F40C7E3921B2EEC70074D929 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40C7E3721B2EEC70074D929 /* LaunchScreen.storyboard */; };
 		F40C7E4621B3E1570074D929 /* RestaurantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40C7E4521B3E1570074D929 /* RestaurantTableViewController.swift */; };
+		F41D2C382216CD1600402F70 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41D2C372216CD1600402F70 /* WalkthroughPageViewController.swift */; };
 		F430657621C28CC600A6B652 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F430656421C28CA400A6B652 /* Rubik-Black.ttf */; };
 		F430657721C28CC600A6B652 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F430656521C28CA500A6B652 /* Rubik-BlackItalic.ttf */; };
 		F430657821C28CC600A6B652 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F430656821C28CA600A6B652 /* Rubik-Bold.ttf */; };
@@ -51,6 +52,7 @@
 		F40C7E3821B2EEC70074D929 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F40C7E3A21B2EEC70074D929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F40C7E4521B3E1570074D929 /* RestaurantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewController.swift; sourceTree = "<group>"; };
+		F41D2C372216CD1600402F70 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
 		F430656221C28CA300A6B652 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		F430656321C28CA400A6B652 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		F430656421C28CA400A6B652 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				F4AB8A4D21C836D100853017 /* MapViewController.swift */,
 				F4ED4B1D21CBD6F4001E367A /* NewRestaurantController.swift */,
 				F4AB8A5321C9692700853017 /* ReviewViewController.swift */,
+				F41D2C372216CD1600402F70 /* WalkthroughPageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				F4AB8A5021C8376A00853017 /* RestaurantDetailSeparatorCell.swift in Sources */,
 				F4AB8A5221C837A900853017 /* RestaurantDetailMapCell.swift in Sources */,
 				F43065A221C3DBBD00A6B652 /* UINavigationController+Ext.swift in Sources */,
+				F41D2C382216CD1600402F70 /* WalkthroughPageViewController.swift in Sources */,
 				F43065A021C3D1CF00A6B652 /* UIColor+Ext.swift in Sources */,
 				F451345421C037FD00DD138C /* RestaurantDetailViewController.swift in Sources */,
 				F496CB7A21CBC22C00A8652B /* RoundedTextField.swift in Sources */,
