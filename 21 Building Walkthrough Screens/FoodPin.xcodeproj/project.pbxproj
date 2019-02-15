@@ -149,7 +149,6 @@
 				F40C7E2E21B2EEC50074D929 /* AppDelegate.swift */,
 				F40C7E3521B2EEC70074D929 /* Assets.xcassets */,
 				F40C7E3A21B2EEC70074D929 /* Info.plist */,
-				F40C7E3721B2EEC70074D929 /* LaunchScreen.storyboard */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -184,6 +183,7 @@
 		F41D2C3422144FAE00402F70 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				F40C7E3721B2EEC70074D929 /* LaunchScreen.storyboard */,
 				F40C7E3221B2EEC50074D929 /* Main.storyboard */,
 				F41D2C3222144F8D00402F70 /* Onboarding.storyboard */,
 			);
