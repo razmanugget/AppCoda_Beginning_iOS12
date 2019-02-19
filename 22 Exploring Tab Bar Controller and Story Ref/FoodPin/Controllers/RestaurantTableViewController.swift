@@ -263,6 +263,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                     print("segue error")
                     return
                 }
+                destinationController.hidesBottomBarWhenPushed = true
                 destinationController.restaurant = (searchController.isActive) ? 
                     searchResults[indexPath.row] : restaurants[indexPath.row]
             }
