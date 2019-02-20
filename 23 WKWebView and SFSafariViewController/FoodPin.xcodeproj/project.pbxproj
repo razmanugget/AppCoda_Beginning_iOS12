@@ -16,6 +16,7 @@
 		F41D2C3322144F8D00402F70 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F41D2C3222144F8D00402F70 /* Onboarding.storyboard */; };
 		F41D2C36221466CB00402F70 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41D2C35221466CB00402F70 /* WalkthroughContentViewController.swift */; };
 		F426AF7B221D7622006CF3D6 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F426AF79221D7622006CF3D6 /* About.storyboard */; };
+		F426AF7D221D880D006CF3D6 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F426AF7C221D880D006CF3D6 /* AboutTableViewController.swift */; };
 		F430657621C28CC600A6B652 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F430656421C28CA400A6B652 /* Rubik-Black.ttf */; };
 		F430657721C28CC600A6B652 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F430656521C28CA500A6B652 /* Rubik-BlackItalic.ttf */; };
 		F430657821C28CC600A6B652 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F430656821C28CA600A6B652 /* Rubik-Bold.ttf */; };
@@ -60,6 +61,7 @@
 		F41D2C3222144F8D00402F70 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		F41D2C35221466CB00402F70 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
 		F426AF7A221D7622006CF3D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
+		F426AF7C221D880D006CF3D6 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		F430656221C28CA300A6B652 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		F430656321C28CA400A6B652 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		F430656421C28CA400A6B652 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
@@ -164,10 +166,11 @@
 		F40C7E4321B3017B0074D929 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F40C7E4521B3E1570074D929 /* RestaurantTableViewController.swift */,
-				F451345321C037FD00DD138C /* RestaurantDetailViewController.swift */,
+				F426AF7C221D880D006CF3D6 /* AboutTableViewController.swift */,
 				F4AB8A4D21C836D100853017 /* MapViewController.swift */,
 				F4ED4B1D21CBD6F4001E367A /* NewRestaurantController.swift */,
+				F40C7E4521B3E1570074D929 /* RestaurantTableViewController.swift */,
+				F451345321C037FD00DD138C /* RestaurantDetailViewController.swift */,
 				F4AB8A5321C9692700853017 /* ReviewViewController.swift */,
 				F41D2C35221466CB00402F70 /* WalkthroughContentViewController.swift */,
 				F463A0652216E79E00A38908 /* WalkthroughPageViewController.swift */,
@@ -377,6 +380,7 @@
 				F430658321C2B30D00A6B652 /* RestaurantDetailIconTextCell.swift in Sources */,
 				F463A0682216FEF500A38908 /* WalkthroughViewController.swift in Sources */,
 				F4AB8A5021C8376A00853017 /* RestaurantDetailSeparatorCell.swift in Sources */,
+				F426AF7D221D880D006CF3D6 /* AboutTableViewController.swift in Sources */,
 				F4AB8A5221C837A900853017 /* RestaurantDetailMapCell.swift in Sources */,
 				F43065A221C3DBBD00A6B652 /* UINavigationController+Ext.swift in Sources */,
 				F43065A021C3D1CF00A6B652 /* UIColor+Ext.swift in Sources */,
