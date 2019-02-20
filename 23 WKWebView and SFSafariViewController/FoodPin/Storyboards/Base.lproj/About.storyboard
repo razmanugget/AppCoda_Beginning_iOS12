@@ -55,7 +55,7 @@
                             <outlet property="delegate" destination="UVH-Vd-ylJ" id="pie-SX-moR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="EiX-Vt-tFT"/>
+                    <navigationItem key="navigationItem" title="About" largeTitleDisplayMode="always" id="EiX-Vt-tFT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LhW-3m-Niu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

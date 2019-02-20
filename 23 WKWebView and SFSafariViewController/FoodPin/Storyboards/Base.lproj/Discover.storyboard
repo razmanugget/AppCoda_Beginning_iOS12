@@ -32,7 +32,7 @@
                             <outlet property="delegate" destination="LAf-mv-Vqg" id="BoS-bc-ovt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="fcu-UO-acs"/>
+                    <navigationItem key="navigationItem" title="Discover" id="fcu-UO-acs"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pcP-Tz-dTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
