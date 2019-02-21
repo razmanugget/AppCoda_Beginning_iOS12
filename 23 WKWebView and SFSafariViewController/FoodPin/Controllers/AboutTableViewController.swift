@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class AboutTableViewController: UITableViewController {
     // MARK: - Variables
@@ -38,8 +39,8 @@ class AboutTableViewController: UITableViewController {
     override func numberOfSections(
         in tableView: UITableView) 
         -> Int {
-        
-        return sectionTitles.count
+            
+            return sectionTitles.count
     }
     
     override func tableView(
@@ -75,10 +76,34 @@ class AboutTableViewController: UITableViewController {
             return cell
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        // forces large titles on first appearance
-//        navigationController?.navigationBar.prefersLargeTitles = true
+    override func tableView(
+        _ tableView: UITableView, 
+        didSelectRowAt indexPath: IndexPath) {
         
+        let link = sectionContent[indexPath.section][indexPath.row].link
+        
+        switch indexPath.section {
+            // leave us feedback section
+        case 0:
+            if indexPath.row == 0 {
+                if let url = URL(string: link) {
+                    UIApplication.shared.open(url)
+                }
+            } else if indexPath.row == 1 {
+                performSegue(withIdentifier: "showWebView", sender: self)
+            }
+        default:
+            break
+        }
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showWebView" {
+            if let destinationController = segue.destination as? WebViewController, let indexPath = tableView.indexPathForSelectedRow {
+                destinationController.targetURL = sectionContent[indexPath.section][indexPath.row].link
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -97,5 +122,5 @@ class AboutTableViewController: UITableViewController {
         }
         tableView.tableFooterView = UIView()
     }
-
+    
 }
