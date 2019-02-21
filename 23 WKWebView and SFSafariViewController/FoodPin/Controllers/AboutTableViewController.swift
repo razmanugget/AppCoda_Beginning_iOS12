@@ -75,6 +75,12 @@ class AboutTableViewController: UITableViewController {
             return cell
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        // forces large titles on first appearance
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -827,7 +827,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="kP9-D7-Wz6" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="D8P-6w-lwE"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="D8P-6w-lwE"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wWQ-ph-Mrz">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -851,7 +851,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MTW-hk-aT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="783" y="489"/>
+            <point key="canvasLocation" x="622" y="490"/>
         </scene>
         <!--About-->
         <scene sceneID="1g3-mR-g5I">
@@ -861,7 +861,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0fZ-Ov-bjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="770" y="526"/>
+            <point key="canvasLocation" x="504" y="526"/>
         </scene>
     </scenes>
     <resources>
