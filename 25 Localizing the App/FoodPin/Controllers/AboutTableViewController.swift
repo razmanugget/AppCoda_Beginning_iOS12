@@ -11,27 +11,28 @@ import SafariServices
 
 class AboutTableViewController: UITableViewController {
     // MARK: - Variables
-    var sectionTitles = ["Feedback", "Follow Us"]
+    var sectionTitles = [
+        NSLocalizedString("Feedback", comment: "Feedback"), 
+        NSLocalizedString("Follow Us", comment: "Follow Us")
+    ]
     var sectionContent = [
         [
             (image: "store", 
-             text: "Rate us on the App Store", 
+             text: NSLocalizedString("Rate us on App Store", comment: "Rate us on App Store"), 
              link: "https://www.apple.com/itunes/charts/paid-apps/"),
             (image: "chat", 
-             text: "Tell us your feedback", 
+             text: NSLocalizedString("Tell us your feedback", comment: "Tell us your feedback"), 
              link: "http://www.appcoda.com/contact")
-        ],
-        [
+        ], [
             (image: "twitter", 
-             text: "Twitter", 
+             text: NSLocalizedString("Twitter", comment: "Twitter"), 
              link: "https://twitter.com/appcodamobile"),
             (image: "facebook", 
-             text: "Facebook", 
+             text: NSLocalizedString("Facebook", comment: "Facebook"), 
              link: "https://facebook.com/appcodamobile"),
             (image: "instagram", 
-             text: "Instagram", 
-             link: "https://www.instagram.com/appcodadotcom")
-        ]
+             text: NSLocalizedString("Instagram", comment: "Instagram"), 
+             link: "https://www.instagram.com/appcodadotcom")]
     ]
     
     // MARK: - Override Functions
