@@ -116,7 +116,6 @@ class AboutTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
-        navigationController?.navigationBar.prefersLargeTitles = true
         
         // configure the navigation bar appearance
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
