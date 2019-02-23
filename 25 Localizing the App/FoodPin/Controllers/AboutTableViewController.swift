@@ -107,7 +107,8 @@ class AboutTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWebView" {
-            if let destinationController = segue.destination as? WebViewController, let indexPath = tableView.indexPathForSelectedRow {
+            if let destinationController = segue.destination as? WebViewController, 
+                let indexPath = tableView.indexPathForSelectedRow {
                 destinationController.targetURL = sectionContent[indexPath.section][indexPath.row].link
             }
         }
