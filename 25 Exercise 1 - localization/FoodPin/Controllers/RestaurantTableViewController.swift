@@ -19,15 +19,15 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     var fetchResultController: NSFetchedResultsController<RestaurantMO>!
     var searchController: UISearchController!
     var searchResults: [RestaurantMO] = []
-
+    
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
-
+    
     @IBOutlet var emptyRestaurantView: UIView!
-
+    
     // MARK: - Functions
-
+    
     // MARK: - NSFetchedResultsControllerDelegate methods
     
     func controllerWillChangeContent(
@@ -60,7 +60,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         default:
             tableView.reloadData()
         }
-
+        
         if let fetchedObjects = controller.fetchedObjects {
             // swiftlint:disable force_cast
             restaurants = fetchedObjects as! [RestaurantMO]
@@ -88,7 +88,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             return false
         })
     }
-
+    
     func updateSearchResults(
         for searchController: UISearchController) {
         
@@ -97,7 +97,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             tableView.reloadData()
         }
     }
-
+    
     // MARK: - Override Functions
     
     // MARK: - UITableViewDataSource
@@ -112,7 +112,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                 tableView.backgroundView?.isHidden = false
                 tableView.separatorStyle = .none
             }
-
+            
             return 1  // this is the default value
     }
     
@@ -139,7 +139,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                     print("error removing datacell")
                     return UITableViewCell()
             }
-
+            
             // determine if we get the restaurant from search result or array
             let restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
             // configure the cell
@@ -153,7 +153,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             
             return cell
     }
-
+    
     // MARK: - TableView actions
     
     override func tableView(
@@ -162,43 +162,46 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         -> UISwipeActionsConfiguration? {
             
             let deleteAction = UIContextualAction(
-            style: .destructive, title: "Delete") { (_, _, completionHandler) in
-                // delete the row from the data source
-                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                    let context = appDelegate.persistentContainer.viewContext
-                    let restaurantToDelete = self.fetchResultController.object(at: indexPath)
-                    context.delete(restaurantToDelete)
-
-                    appDelegate.saveContext()
-                }
-
-                // call completion handler to dismiss the action button
-                completionHandler(true)
+                style: .destructive, 
+                title: NSLocalizedString("Delete", comment: "Delete")) { (_, _, completionHandler) in
+                    // delete the row from the data source
+                    if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                        let context = appDelegate.persistentContainer.viewContext
+                        let restaurantToDelete = self.fetchResultController.object(at: indexPath)
+                        context.delete(restaurantToDelete)
+                        
+                        appDelegate.saveContext()
+                    }
+                    
+                    // call completion handler to dismiss the action button
+                    completionHandler(true)
             }
             
             let shareAction = UIContextualAction(
-            style: .normal, title: "Share") { (_, sourceView, completionHandler) in
-                let defaultText = "Just checking in at " + self.restaurants[indexPath.row].name!
-                let activityController: UIActivityViewController
-                
-                if let restaurantImage = self.restaurants[indexPath.row].image,
-                    let imageToShare = UIImage(data: restaurantImage as Data) {
-                    activityController = UIActivityViewController(
-                        activityItems: [defaultText, imageToShare], applicationActivities: nil)
-                } else {
-                    activityController = UIActivityViewController(
-                        activityItems: [defaultText], applicationActivities: nil)
-                }
-
-                // fix for iPad
-                if let popoverController = activityController.popoverPresentationController {
-                    if let cell = tableView.cellForRow(at: indexPath) {
-                        popoverController.sourceView = cell
-                        popoverController.sourceRect = cell.bounds
+                style: .normal, 
+                title: NSLocalizedString("Share", comment: "Share")) { (_, sourceView, completionHandler) in
+                    let defaultText = NSLocalizedString(
+                        "Just checking in at ", comment: "Just checking in at ") + self.restaurants[indexPath.row].name!
+                    let activityController: UIActivityViewController
+                    
+                    if let restaurantImage = self.restaurants[indexPath.row].image,
+                        let imageToShare = UIImage(data: restaurantImage as Data) {
+                        activityController = UIActivityViewController(
+                            activityItems: [defaultText, imageToShare], applicationActivities: nil)
+                    } else {
+                        activityController = UIActivityViewController(
+                            activityItems: [defaultText], applicationActivities: nil)
                     }
-                }
-                self.present(activityController, animated: true, completion: nil)
-                completionHandler(true)
+                    
+                    // fix for iPad
+                    if let popoverController = activityController.popoverPresentationController {
+                        if let cell = tableView.cellForRow(at: indexPath) {
+                            popoverController.sourceView = cell
+                            popoverController.sourceRect = cell.bounds
+                        }
+                    }
+                    self.present(activityController, animated: true, completion: nil)
+                    completionHandler(true)
             }
             
             // color the options w/ specific color
@@ -206,7 +209,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             deleteAction.image = UIImage(named: "delete")
             shareAction.backgroundColor = UIColor.orange   // simple color
             shareAction.image = UIImage(named: "share")
-
+            
             // show the options
             let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
             return swipeConfiguration
@@ -217,20 +220,23 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
         -> UISwipeActionsConfiguration? {
             
-            let checkInAction = UIContextualAction(style: .normal, title: "Check In") { (_, _, completionHandler) in
-                // check-in
-                guard let cell = tableView.cellForRow(at: indexPath)
-                    as? RestaurantTableViewCell else {
-                        print("error with check-in")
-                        return
-                }
-                self.restaurants[indexPath.row].isVisited = (self.restaurants[indexPath.row].isVisited) ? false : true
-                cell.heartImageView.isHidden = self.restaurants[indexPath.row].isVisited ? false : true
-
-                // call completion handler to dismiss the action button
-                completionHandler(true)
+            let checkInAction = UIContextualAction(
+                style: .normal, 
+                title: NSLocalizedString("Check In", comment: "Check In")) { (_, _, completionHandler) in
+                    // check-in
+                    guard let cell = tableView.cellForRow(at: indexPath)
+                        as? RestaurantTableViewCell else {
+                            print("error with check-in")
+                            return
+                    }
+                    self.restaurants[indexPath.row].isVisited = (
+                        self.restaurants[indexPath.row].isVisited) ? false : true
+                    cell.heartImageView.isHidden = self.restaurants[indexPath.row].isVisited ? false : true
+                    
+                    // call completion handler to dismiss the action button
+                    completionHandler(true)
             }
-
+            
             // color the options
             let checkInIcon = restaurants[indexPath.row].isVisited ? "undo" : "tick"
             // using the extension here for simplier color choice
@@ -269,7 +275,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             }
         }
     }
-
+    
     // MARK: - View controller life cycle
     override func viewWillAppear(
         _ animated: Bool) {
@@ -294,7 +300,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //nav bar customization
         navigationController?.navigationBar.prefersLargeTitles = true
         // to make background transparent, set image and shadow to blank UIImage
@@ -307,20 +313,20 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                 NSAttributedString.Key.font: customFont
             ]
         }
-
+        
         // prepare the empty view
         tableView.backgroundView = emptyRestaurantView
         tableView.backgroundView?.isHidden = true
         tableView.separatorStyle = .none
-
+        
         // adjust width on iPad only
         tableView.cellLayoutMarginsFollowReadableWidth = true
-
+        
         // fetch data from data store
         let fetchRequest: NSFetchRequest<RestaurantMO> = RestaurantMO.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
-
+        
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let context = appDelegate.persistentContainer.viewContext
             fetchResultController = NSFetchedResultsController(
@@ -329,9 +335,9 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                 sectionNameKeyPath: nil,
                 cacheName: nil
             )
-
+            
             fetchResultController.delegate = self
-
+            
             do {
                 try fetchResultController.performFetch()
                 if let fetchedObjects = fetchResultController.fetchedObjects {
@@ -341,7 +347,7 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                 print(error)
             }
         }
-
+        
         // search results update
         searchController = UISearchController(searchResultsController: nil)
         // places search in the nav bar
@@ -350,7 +356,8 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search restaurants..."
+        searchController.searchBar.placeholder = NSLocalizedString(
+            "Search restaurants...", comment: "Search restaurants...")
         searchController.searchBar.barTintColor = .white
         searchController.searchBar.tintColor = UIColor(red: 231, green: 76, blue: 60)
     }

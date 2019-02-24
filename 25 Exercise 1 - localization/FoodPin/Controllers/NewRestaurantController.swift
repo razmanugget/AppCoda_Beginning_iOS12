@@ -59,22 +59,25 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         
         let errorType = self.validateInput()
         
+        //        NSLocalizedString("Feedback", comment: "Feedback")
+        
         if errorType.isEmpty {
             let alertController =
-                UIAlertController(title: "Oops", message:
-                    "We can't continue because you need to fill in the \(errorType) field",
-                    preferredStyle: .alert)
+                UIAlertController(title: NSLocalizedString("Oops", comment: "Oops"), 
+                                  message: NSLocalizedString("We can't continue because you need to fill in the \(errorType) field", 
+                                    comment: "Can't continue"),
+                                  preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion: nil)
-
+            
             return
         }
-        print("Name: \(nameTextField.text ?? "")")
-        print("Type: \(typeTextField.text ?? "")")
-        print("Location: \(addressTextField.text ?? "")")
-        print("Phone: \(phoneTextField.text ?? "")")
-        print("Description: \(descriptionTextView.text ?? "")")
+        print(NSLocalizedString("Name: \(nameTextField.text ?? "")", comment: "Name"))
+        print(NSLocalizedString("Type: \(typeTextField.text ?? "")", comment: "Type"))
+        print(NSLocalizedString("Location: \(addressTextField.text ?? "")", comment: "Location"))
+        print(NSLocalizedString("Phone: \(phoneTextField.text ?? "")", comment: "Phone"))
+        print(NSLocalizedString("Description: \(descriptionTextView.text ?? "")", comment: "Description"))
 
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
@@ -90,7 +93,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                 restaurant.image = restaurantImage.pngData()
             }
 
-            print("Saving data to context ...")
+            print(NSLocalizedString("Saving data to context ...", comment: "Saving data"))
             appDelegate.saveContext()
         }
 
