@@ -1,0 +1,6 @@
+/* Bundle name */
+"CFBundleName" = "$(PRODUCT_NAME)";
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "You need to grant the app access to your camera in order to take photos.";
+/* Privacy - Photo Library Usage Description */
+"NSPhotoLibraryUsageDescription" = "You need to grant the app access to your photo library so you can pick your favorite restaurant photo.";

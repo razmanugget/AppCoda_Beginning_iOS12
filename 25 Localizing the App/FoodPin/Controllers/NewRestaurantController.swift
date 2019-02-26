@@ -63,11 +63,10 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         
         if errorType.isEmpty {
             let alertController =
-                UIAlertController(
-                    title: NSLocalizedString("Oops", comment: "Oops"), 
-                    message: NSLocalizedString("We can't continue because you need to fill in the \(errorType) field",
-                        comment: "Can't continue"),
-                    preferredStyle: .alert)
+                UIAlertController(title: NSLocalizedString("Oops", comment: "Oops"), 
+                                  message: NSLocalizedString("We can't continue because you need to fill in the \(errorType) field", 
+                                    comment: "Can't continue"),
+                                  preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion: nil)

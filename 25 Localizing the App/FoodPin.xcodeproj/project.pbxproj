@@ -65,6 +65,14 @@
 		F426AF7C221D880D006CF3D6 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		F426AF7F221F13F4006CF3D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Discover.storyboard; sourceTree = "<group>"; };
 		F426AF82221F14D4006CF3D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
+		F427E84322254F470016FA68 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/About.strings"; sourceTree = "<group>"; };
+		F427E84422254F490016FA68 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Discover.strings"; sourceTree = "<group>"; };
+		F427E84522254F4B0016FA68 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		F427E84622254F4E0016FA68 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		F427E84722254F520016FA68 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/About.strings; sourceTree = "<group>"; };
+		F427E84822254F540016FA68 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Discover.strings; sourceTree = "<group>"; };
+		F427E84922254F560016FA68 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F427E84A22254F590016FA68 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F430656221C28CA300A6B652 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		F430656321C28CA400A6B652 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		F430656421C28CA400A6B652 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
@@ -404,6 +412,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F40C7E3321B2EEC50074D929 /* Base */,
+				F427E84622254F4E0016FA68 /* zh-Hant */,
+				F427E84A22254F590016FA68 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -412,6 +422,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F40C7E3821B2EEC70074D929 /* Base */,
+				F427E84522254F4B0016FA68 /* zh-Hant */,
+				F427E84922254F560016FA68 /* de */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -420,6 +432,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F426AF7F221F13F4006CF3D6 /* Base */,
+				F427E84422254F490016FA68 /* zh-Hant */,
+				F427E84822254F540016FA68 /* de */,
 			);
 			name = Discover.storyboard;
 			sourceTree = "<group>";
@@ -428,6 +442,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F426AF82221F14D4006CF3D6 /* Base */,
+				F427E84322254F470016FA68 /* zh-Hant */,
+				F427E84722254F520016FA68 /* de */,
 			);
 			name = About.storyboard;
 			sourceTree = "<group>";
@@ -439,6 +455,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -500,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
