@@ -29,21 +29,21 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             typeTextField.delegate = self
         }
     }
-
+    
     @IBOutlet var addressTextField: RoundedTextField! {
         didSet {
             addressTextField.tag = 3
             addressTextField.delegate = self
         }
     }
-
+    
     @IBOutlet var phoneTextField: RoundedTextField! {
         didSet {
             phoneTextField.tag = 4
             phoneTextField.delegate = self
         }
     }
-
+    
     @IBOutlet var descriptionTextView: UITextView! {
         didSet {
             descriptionTextView.tag = 5
@@ -59,25 +59,29 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         
         let errorType = self.validateInput()
         
+        //        NSLocalizedString("Feedback", comment: "Feedback")
+        
         if errorType.isEmpty {
             let alertController =
-                UIAlertController(title: "Oops", message:
-                    "We can't continue because you need to fill in the \(errorType) field",
+                UIAlertController(
+                    title: NSLocalizedString("Oops", comment: "Oops"), 
+                    message: NSLocalizedString("We can't continue because you need to fill in the \(errorType) field",
+                        comment: "Can't continue"),
                     preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion: nil)
-
+            
             return
         }
-        print("Name: \(nameTextField.text ?? "")")
-        print("Type: \(typeTextField.text ?? "")")
-        print("Location: \(addressTextField.text ?? "")")
-        print("Phone: \(phoneTextField.text ?? "")")
-        print("Description: \(descriptionTextView.text ?? "")")
-
+        print(NSLocalizedString("Name: \(nameTextField.text ?? "")", comment: "Name"))
+        print(NSLocalizedString("Type: \(typeTextField.text ?? "")", comment: "Type"))
+        print(NSLocalizedString("Location: \(addressTextField.text ?? "")", comment: "Location"))
+        print(NSLocalizedString("Phone: \(phoneTextField.text ?? "")", comment: "Phone"))
+        print(NSLocalizedString("Description: \(descriptionTextView.text ?? "")", comment: "Description"))
+        
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-
+            
             restaurant = RestaurantMO(context: appDelegate.persistentContainer.viewContext)
             restaurant.name = nameTextField.text
             restaurant.type = typeTextField.text
@@ -85,18 +89,18 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             restaurant.phone = phoneTextField.text
             restaurant.summary = descriptionTextView.text
             restaurant.isVisited = false
-
+            
             if let restaurantImage = photoImageView.image {
                 restaurant.image = restaurantImage.pngData()
             }
-
-            print("Saving data to context ...")
+            
+            print(NSLocalizedString("Saving data to context ...", comment: "Saving data"))
             appDelegate.saveContext()
         }
-
+        
         dismiss(animated: true, completion: nil)
     }
-
+    
     // MARK: - UITextFieldDelegate methods
     
     func textFieldShouldReturn(
@@ -127,7 +131,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             }
             return error
     }
-
+    
     // MARK: - UIImagePickerControllerDelegate methods
     
     func imagePickerController(
@@ -139,9 +143,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             photoImageView.contentMode = .scaleAspectFill
             photoImageView.clipsToBounds = true
         }
-
+        
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         // I use `photoImageView.superview!` below because I don't know the exact context.
         // If photoImageView is child view of viewController.view, you can do just `view.(...)Anchor`
         photoImageView.leadingAnchor.constraint(equalTo: photoImageView.superview!.leadingAnchor).isActive = true
@@ -159,29 +163,33 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         
         if indexPath.row == 0 {
             let photoSourceRequestController = UIAlertController(
-                title: "", message: "Choose your photo source",
+                title: "", message: NSLocalizedString("Choose your photo source", comment: "Choose your photo source"),
                 preferredStyle: .actionSheet)
-            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (_) in
-                if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    let imagePicker = UIImagePickerController()
-                    imagePicker.allowsEditing = false
-                    imagePicker.sourceType = .camera
-                    imagePicker.delegate = self
-                    self.present(imagePicker, animated: true, completion: nil)
-                }
+            let cameraAction = UIAlertAction(
+                title: NSLocalizedString("Camera", comment: "Camera"), 
+                style: .default, handler: { (_) in
+                    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                        let imagePicker = UIImagePickerController()
+                        imagePicker.allowsEditing = false
+                        imagePicker.sourceType = .camera
+                        imagePicker.delegate = self
+                        self.present(imagePicker, animated: true, completion: nil)
+                    }
             })
-            let photoLibraryAction = UIAlertAction(title: "Photo library", style: .default, handler: { (_) in
-                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                    let imagePicker = UIImagePickerController()
-                    imagePicker.allowsEditing = false
-                    imagePicker.sourceType = .photoLibrary
-                    imagePicker.delegate = self
-                    self.present(imagePicker, animated: true, completion: nil)
-                }
+            let photoLibraryAction = UIAlertAction(
+                title: NSLocalizedString("Photo library", comment: "Photo library"), 
+                style: .default, handler: { (_) in
+                    if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                        let imagePicker = UIImagePickerController()
+                        imagePicker.allowsEditing = false
+                        imagePicker.sourceType = .photoLibrary
+                        imagePicker.delegate = self
+                        self.present(imagePicker, animated: true, completion: nil)
+                    }
             })
             photoSourceRequestController.addAction(cameraAction)
             photoSourceRequestController.addAction(photoLibraryAction)
-
+            
             // for ipad
             if let popoverController = photoSourceRequestController.popoverPresentationController {
                 if let cell = tableView.cellForRow(at: indexPath) {
@@ -192,12 +200,12 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             present(photoSourceRequestController, animated: true, completion: nil)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.separatorStyle = .none
-
+        
         // Configure navigation bar appearance
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()

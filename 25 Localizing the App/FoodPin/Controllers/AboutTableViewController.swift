@@ -13,7 +13,7 @@ class AboutTableViewController: UITableViewController {
     // MARK: - Variables
     var sectionTitles = [
         NSLocalizedString("Feedback", comment: "Feedback"), 
-        NSLocalizedString("Follow Us", comment: "Follow Us")
+        NSLocalizedString("Follow Us", comment: "Follow Us") 
     ]
     var sectionContent = [
         [
