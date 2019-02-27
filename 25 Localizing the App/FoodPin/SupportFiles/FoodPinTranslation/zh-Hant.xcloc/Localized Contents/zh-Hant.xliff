@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="FoodPin/Storyboards/Base.lproj/About.storyboard" source-language="en" target-language="en" datatype="plaintext">
+  <file original="FoodPin/Storyboards/Base.lproj/About.storyboard" source-language="en" datatype="plaintext" target-language="zh-Hant">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10P91b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="4LY-tu-u2L.title">
         <source>About</source>
-        <target>About</target>
+        <target>關於</target>
         <note>Class = "UINavigationItem"; title = "About"; ObjectID = "4LY-tu-u2L";</note>
       </trans-unit>
       <trans-unit id="K0B-Fh-x4i.text">
@@ -17,14 +17,14 @@
       </trans-unit>
       <trans-unit id="R4C-ht-ITw.title">
         <source>About</source>
-        <target>About</target>
+        <target>關於</target>
         <note>Class = "UITabBarItem"; title = "About"; ObjectID = "R4C-ht-ITw";</note>
       </trans-unit>
     </body>
   </file>
-  <file original="FoodPin/Storyboards/Base.lproj/Discover.storyboard" source-language="en" target-language="en" datatype="plaintext">
+  <file original="FoodPin/Storyboards/Base.lproj/Discover.storyboard" source-language="en" datatype="plaintext" target-language="zh-Hant">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10P91b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="X49-KG-YCI.title">
@@ -39,9 +39,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="FoodPin/Storyboards/Base.lproj/Main.storyboard" source-language="en" target-language="en" datatype="plaintext">
+  <file original="FoodPin/Storyboards/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="zh-Hant">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10P91b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="0Fn-Ns-hVW.placeholder">
@@ -61,7 +61,7 @@
       </trans-unit>
       <trans-unit id="8TC-IJ-hE7.text">
         <source>Phone / Location</source>
-        <target>Phone / Location</target>
+        <target>電話號碼 / Location</target>
         <note>Class = "UILabel"; text = "Phone / Location"; ObjectID = "8TC-IJ-hE7";</note>
       </trans-unit>
       <trans-unit id="65f-9X-baL.text">
@@ -81,7 +81,7 @@
       </trans-unit>
       <trans-unit id="BtC-aq-zqb.placeholder">
         <source>Fill in the restaurant phone</source>
-        <target>Fill in the restaurant phone</target>
+        <target>填寫餐廳電話</target>
         <note>Class = "UITextField"; placeholder = "Fill in the restaurant phone"; ObjectID = "BtC-aq-zqb";</note>
       </trans-unit>
       <trans-unit id="Et4-0l-bPO.normalTitle">
@@ -91,7 +91,7 @@
       </trans-unit>
       <trans-unit id="Ov6-6k-IWW.title">
         <source>Favorites</source>
-        <target>Favorites</target>
+        <target>不可不試</target>
         <note>Class = "UITabBarItem"; title = "Favorites"; ObjectID = "Ov6-6k-IWW";</note>
       </trans-unit>
       <trans-unit id="S92-tk-ZUY.text">
@@ -106,17 +106,17 @@
       </trans-unit>
       <trans-unit id="VYE-R0-mHC.text">
         <source>Type</source>
-        <target>Type</target>
+        <target>類別</target>
         <note>Class = "UILabel"; text = "Type"; ObjectID = "VYE-R0-mHC";</note>
       </trans-unit>
       <trans-unit id="VpA-se-lNo.text">
         <source>Type</source>
-        <target>Type</target>
+        <target>類別</target>
         <note>Class = "UILabel"; text = "Type"; ObjectID = "VpA-se-lNo";</note>
       </trans-unit>
       <trans-unit id="XOY-YU-Vm0.text">
         <source>Description</source>
-        <target>Description</target>
+        <target>簡介</target>
         <note>Class = "UILabel"; text = "Description"; ObjectID = "XOY-YU-Vm0";</note>
       </trans-unit>
       <trans-unit id="cMd-wb-Jae.normalTitle">
@@ -136,7 +136,7 @@
       </trans-unit>
       <trans-unit id="jV9-OC-mlf.text">
         <source>Description</source>
-        <target>Description</target>
+        <target>簡介</target>
         <note>Class = "UILabel"; text = "Description"; ObjectID = "jV9-OC-mlf";</note>
       </trans-unit>
       <trans-unit id="mEz-v8-fYY.text">
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="nmX-Qg-HLL.text">
         <source>Name</source>
-        <target>Name</target>
+        <target>餐廳名</target>
         <note>Class = "UILabel"; text = "Name"; ObjectID = "nmX-Qg-HLL";</note>
       </trans-unit>
       <trans-unit id="oew-aU-azV.text">
@@ -161,7 +161,7 @@
       </trans-unit>
       <trans-unit id="ps0-XC-XFc.text">
         <source>Name</source>
-        <target>Name</target>
+        <target>餐廳名</target>
         <note>Class = "UILabel"; text = "Name"; ObjectID = "ps0-XC-XFc";</note>
       </trans-unit>
       <trans-unit id="qY4-2V-MhI.normalTitle">
@@ -196,126 +196,105 @@
       </trans-unit>
       <trans-unit id="zw4-Cx-a5w.text">
         <source>Phone</source>
-        <target>Phone</target>
+        <target>電話號碼</target>
         <note>Class = "UILabel"; text = "Phone"; ObjectID = "zw4-Cx-a5w";</note>
       </trans-unit>
     </body>
   </file>
-  <file original="FoodPin/SupportFiles/en.lproj/InfoPlist.strings" source-language="en" target-language="en" datatype="plaintext">
+  <file original="FoodPin/SupportFiles/en.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="zh-Hant">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10P91b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
         <source>$(PRODUCT_NAME)</source>
-        <target>$(PRODUCT_NAME)</target>
         <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSCameraUsageDescription">
         <source>You need to grant the app access to your camera in order to take photos.</source>
-        <target>You need to grant the app access to your camera in order to take photos.</target>
         <note>Privacy - Camera Usage Description</note>
       </trans-unit>
       <trans-unit id="NSPhotoLibraryUsageDescription">
         <source>You need to grant the app access to your photo library so you can pick your favorite restaurant photo.</source>
-        <target>You need to grant the app access to your photo library so you can pick your favorite restaurant photo.</target>
         <note>Privacy - Photo Library Usage Description</note>
       </trans-unit>
     </body>
   </file>
-  <file original="FoodPin/SupportFiles/en.lproj/Localizable.strings" source-language="en" target-language="en" datatype="plaintext">
+  <file original="FoodPin/SupportFiles/en.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="zh-Hant">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10P91b"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
     <body>
       <trans-unit id="Camera">
         <source>Camera</source>
-        <target>Camera</target>
         <note>Camera</note>
       </trans-unit>
       <trans-unit id="Check In">
         <source>Check In</source>
-        <target>Check In</target>
         <note>Check In</note>
       </trans-unit>
       <trans-unit id="Choose your photo source">
         <source>Choose your photo source</source>
-        <target>Choose your photo source</target>
         <note>Choose your photo source</note>
       </trans-unit>
       <trans-unit id="Delete">
         <source>Delete</source>
-        <target>Delete</target>
         <note>Delete</note>
       </trans-unit>
       <trans-unit id="Facebook">
         <source>Facebook</source>
-        <target>Facebook</target>
         <note>Facebook</note>
       </trans-unit>
       <trans-unit id="Feedback">
         <source>Feedback</source>
-        <target>Feedback</target>
         <note>Feedback</note>
       </trans-unit>
       <trans-unit id="Follow Us">
         <source>Follow Us</source>
-        <target>Follow Us</target>
         <note>Follow Us</note>
       </trans-unit>
       <trans-unit id="Instagram">
         <source>Instagram</source>
-        <target>Instagram</target>
         <note>Instagram</note>
       </trans-unit>
       <trans-unit id="Just checking in at ">
         <source>Just checking in at </source>
-        <target>Just checking in at </target>
         <note>Just checking in at</note>
       </trans-unit>
       <trans-unit id="Oops">
         <source>Oops</source>
-        <target>Oops</target>
         <note>Oops</note>
       </trans-unit>
       <trans-unit id="Photo library">
         <source>Photo library</source>
-        <target>Photo library</target>
         <note>Photo library</note>
       </trans-unit>
       <trans-unit id="Rate us on App Store">
         <source>Rate us on App Store</source>
-        <target>Rate us on App Store</target>
         <note>Rate us on App Store</note>
       </trans-unit>
       <trans-unit id="Saving data to context ...">
         <source>Saving data to context ...</source>
-        <target>Saving data to context ...</target>
         <note>Saving data</note>
       </trans-unit>
       <trans-unit id="Search restaurants...">
         <source>Search restaurants...</source>
-        <target>Search restaurants...</target>
         <note>Search restaurants...</note>
       </trans-unit>
       <trans-unit id="Share">
         <source>Share</source>
-        <target>Share</target>
         <note>Share</note>
       </trans-unit>
       <trans-unit id="Tell us your feedback">
         <source>Tell us your feedback</source>
-        <target>Tell us your feedback</target>
         <note>Tell us your feedback</note>
       </trans-unit>
       <trans-unit id="Twitter">
         <source>Twitter</source>
-        <target>Twitter</target>
         <note>Twitter</note>
       </trans-unit>
       <trans-unit id="We can't continue because you need to fill in the (errorType) field">
         <source>We can't continue because you need to fill in the (errorType) field</source>
-        <target>We can't continue because you need to fill in the (errorType) field</target>
         <note>Can't continue</note>
       </trans-unit>
     </body>
