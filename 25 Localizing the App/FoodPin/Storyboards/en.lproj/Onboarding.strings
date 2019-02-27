@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "Subheading"; ObjectID = "Teg-Nl-H1y"; */
+"Teg-Nl-H1y.text" = "Subheading";
+
+/* Class = "UILabel"; text = "Heading"; ObjectID = "iLA-kD-3Wx"; */
+"iLA-kD-3Wx.text" = "Heading";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "pFd-WX-jQ2"; */
+"pFd-WX-jQ2.normalTitle" = "Next";
+
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "tIm-sk-cDx"; */
+"tIm-sk-cDx.normalTitle" = "Skip";
