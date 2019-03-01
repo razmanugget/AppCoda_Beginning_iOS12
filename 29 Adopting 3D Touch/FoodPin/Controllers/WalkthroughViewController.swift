@@ -44,6 +44,33 @@ WalkthroughPageViewControllerDelegate {
         updateUI()
     }
     
+    func createQuickActions() {
+        // add quick actions, 1st check for 3d touch capable
+        if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
+            if let bundleIdentifier = Bundle.main.bundleIdentifier {
+                let shortcutItem1 = UIApplicationShortcutItem(
+                    type: "\(bundleIdentifier).OpenFavorites", 
+                    localizedTitle: "Show Favorites", 
+                    localizedSubtitle: nil, 
+                    icon: UIApplicationShortcutIcon(templateImageName: "favorite"), 
+                    userInfo: nil)
+                let shortcutItem2 = UIApplicationShortcutItem(
+                    type: "\(bundleIdentifier).OpenDiscover", 
+                    localizedTitle: "Discover Restaurants", 
+                    localizedSubtitle: nil, 
+                    icon: UIApplicationShortcutIcon(templateImageName: "discover"), 
+                    userInfo: nil)
+                let shortcutItem3 = UIApplicationShortcutItem(
+                    type: "\(bundleIdentifier).NewRestaurant", 
+                    localizedTitle: "New Restaurant", 
+                    localizedSubtitle: nil, 
+                    icon: UIApplicationShortcutIcon(type: .add), 
+                    userInfo: nil)
+                UIApplication.shared.shortcutItems = [shortcutItem1, shortcutItem2, shortcutItem3]
+            }
+        }
+    }
+    
     func updateUI() {
         if let index = walkthroughPageViewController?.currentIndex {
             switch index {
