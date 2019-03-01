@@ -36,6 +36,7 @@ WalkthroughPageViewControllerDelegate {
                 walkthroughPageViewController?.forwardPage()
             case 2:
                 UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
+                createQuickActions()
                 dismiss(animated: true, completion: nil)
             default:
                 break
