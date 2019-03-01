@@ -45,8 +45,6 @@ extension RestaurantTableViewController: UIViewControllerPreviewingDelegate {
     
 }
 
-// MARK: - IBActions
-
 class RestaurantTableViewController: UITableViewController,
 NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     // MARK: - Variables

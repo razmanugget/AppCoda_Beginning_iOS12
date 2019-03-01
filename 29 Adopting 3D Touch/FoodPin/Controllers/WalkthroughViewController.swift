@@ -24,6 +24,8 @@ WalkthroughPageViewControllerDelegate {
     
     @IBAction func skipButtonTapped(sender: UIButton) {
         UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
+        createQuickActions()
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -50,19 +52,19 @@ WalkthroughPageViewControllerDelegate {
         if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
             if let bundleIdentifier = Bundle.main.bundleIdentifier {
                 let shortcutItem1 = UIApplicationShortcutItem(
-                    type: "\(bundleIdentifier).OpenFavorites", 
+                    type: "\(bundleIdentifier).openFavorites", 
                     localizedTitle: "Show Favorites", 
                     localizedSubtitle: nil, 
                     icon: UIApplicationShortcutIcon(templateImageName: "favorite"), 
                     userInfo: nil)
                 let shortcutItem2 = UIApplicationShortcutItem(
-                    type: "\(bundleIdentifier).OpenDiscover", 
+                    type: "\(bundleIdentifier).openDiscover", 
                     localizedTitle: "Discover Restaurants", 
                     localizedSubtitle: nil, 
                     icon: UIApplicationShortcutIcon(templateImageName: "discover"), 
                     userInfo: nil)
                 let shortcutItem3 = UIApplicationShortcutItem(
-                    type: "\(bundleIdentifier).NewRestaurant", 
+                    type: "\(bundleIdentifier).newRestaurant", 
                     localizedTitle: "New Restaurant", 
                     localizedSubtitle: nil, 
                     icon: UIApplicationShortcutIcon(type: .add), 
@@ -71,6 +73,8 @@ WalkthroughPageViewControllerDelegate {
             }
         }
     }
+    
+    
     
     func updateUI() {
         if let index = walkthroughPageViewController?.currentIndex {

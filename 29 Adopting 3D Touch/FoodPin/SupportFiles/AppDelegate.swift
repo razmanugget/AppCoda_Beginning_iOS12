@@ -14,19 +14,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+//    enum QuickAction: String {
+//        case OpenFavorites = "OpenFavorites"
+//        case OpenDiscover = "OpenDiscover"
+//        case NewRestaurant = "NewRestaurant"
+//        
+//        init?(fullIdentifier: String) {
+//            guard let shortcutIdentifier = fullIdentifier.components(separatedBy: ".").last else {
+//                return nil
+//            }
+//            self.init(rawValue: shortcutIdentifier)
+//        }
+//    }
+    
     enum QuickAction: String {
         case openFavorites = "OpenFavorites"
         case openDiscover = "OpenDiscover"
         case newRestaurant = "NewRestaurant"
         
         init?(fullIdentifier: String) {
+            
             guard let shortcutIdentifier = fullIdentifier.components(separatedBy: ".").last else {
                 return nil
             }
+            
             self.init(rawValue: shortcutIdentifier)
         }
     }
-    
+
     func application(
         _ application: UIApplication, 
         performActionFor shortcutItem: UIApplicationShortcutItem, 
