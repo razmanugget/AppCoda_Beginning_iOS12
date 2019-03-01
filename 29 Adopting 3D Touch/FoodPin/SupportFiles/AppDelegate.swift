@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     enum QuickAction: String {
-        case OpenFavorites = "OpenFavorites"
-        case OpenDiscover = "OpenDiscover"
-        case NewRestaurant = "NewRestaurant"
+        case openFavorites = "OpenFavorites"
+        case openDiscover = "OpenDiscover"
+        case newRestaurant = "NewRestaurant"
         
         init?(fullIdentifier: String) {
             guard let shortcutIdentifier = fullIdentifier.components(separatedBy: ".").last else {
@@ -44,12 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let tabBarController = window?.rootViewController as? UITabBarController else {
                 return false
             }
+            
             switch shortcutIdentifier {
-            case .OpenFavorites:
+            case .openFavorites:
                 tabBarController.selectedIndex = 0
-            case .OpenDiscover: 
+            case .openDiscover: 
                 tabBarController.selectedIndex = 1
-            case .NewRestaurant:
+            case .newRestaurant:
                 if let navController = tabBarController.viewControllers?[0] {
                     let restaurantTableViewController = navController.children[0]
                     restaurantTableViewController.performSegue(

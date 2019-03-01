@@ -10,6 +10,41 @@ import UIKit
 import CoreData
 
 // MARK: - Enums | Extensions
+extension RestaurantTableViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(
+        _ previewingContext: UIViewControllerPreviewing, 
+        viewControllerForLocation location: CGPoint) 
+        -> UIViewController? {
+            
+            guard let indexPath = tableView.indexPathForRow(at: location) else {
+                return nil
+            }
+            guard let cell = tableView.cellForRow(at: indexPath) else {
+                return nil
+            }
+            guard let restaurantDetailViewController = storyboard?.instantiateViewController(withIdentifier: "RestaurantDetailViewController") as? RestaurantDetailViewController else {
+                return nil
+            }
+            
+            let selectedRestaurant = restaurants[indexPath.row]
+            restaurantDetailViewController.restaurant = selectedRestaurant
+            
+            restaurantDetailViewController.preferredContentSize = CGSize(width: 0.0, height: 460.0)
+            previewingContext.sourceRect = cell.frame
+            
+            return restaurantDetailViewController
+    }
+    
+    func previewingContext(
+        _ previewingContext: UIViewControllerPreviewing, 
+        commit viewControllerToCommit: UIViewController) {
+        
+        show(viewControllerToCommit, sender: self)
+    }
+    
+}
+
 // MARK: - IBActions
 
 class RestaurantTableViewController: UITableViewController,
@@ -360,5 +395,10 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             "Search restaurants...", comment: "Search restaurants...")
         searchController.searchBar.barTintColor = .white
         searchController.searchBar.tintColor = UIColor(red: 231, green: 76, blue: 60)
+        
+        // peek/pop
+        if (traitCollection.forceTouchCapability == .available) {
+            registerForPreviewing(with: self as! UIViewControllerPreviewingDelegate, sourceView: view)
+        }
     }
 }
