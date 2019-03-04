@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 // MARK: - Enums | Extensions
 extension RestaurantTableViewController: UIViewControllerPreviewingDelegate {

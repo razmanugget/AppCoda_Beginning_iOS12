@@ -8,24 +8,12 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-//    enum QuickAction: String {
-//        case OpenFavorites = "OpenFavorites"
-//        case OpenDiscover = "OpenDiscover"
-//        case NewRestaurant = "NewRestaurant"
-//        
-//        init?(fullIdentifier: String) {
-//            guard let shortcutIdentifier = fullIdentifier.components(separatedBy: ".").last else {
-//                return nil
-//            }
-//            self.init(rawValue: shortcutIdentifier)
-//        }
-//    }
     
     enum QuickAction: String {
         case openFavorites = "OpenFavorites"
@@ -95,6 +83,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // if wanting to change the statusbar style across the entire app
             // must also change in info.plist
             //    UIApplication.shared.statusBarStyle = .lightContent
+            
+            UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .sound, .badge]) { (granted, _) in
+                if granted {
+                    print("User notifications are allowed.")
+                } else {
+                    print("User notifications are not allowed.")
+                }
+            }
+            
             return true
     }
 
