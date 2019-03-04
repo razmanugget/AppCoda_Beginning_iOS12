@@ -24,7 +24,8 @@ extension RestaurantTableViewController: UIViewControllerPreviewingDelegate {
             guard let cell = tableView.cellForRow(at: indexPath) else {
                 return nil
             }
-            guard let restaurantDetailViewController = storyboard?.instantiateViewController(withIdentifier: "RestaurantDetailViewController") as? RestaurantDetailViewController else {
+            guard let restaurantDetailViewController = storyboard?.instantiateViewController(
+                withIdentifier: "RestaurantDetailViewController") as? RestaurantDetailViewController else {
                 return nil
             }
             
@@ -130,6 +131,31 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             filterContent(for: searchText)
             tableView.reloadData()
         }
+    }
+    
+    func prepareNotification() {
+        // make sure the restaurant array is not empty
+        if restaurants.isEmpty {
+            return
+        }
+        
+        // pick a restaurant randomly
+        let randomNum = Int.random(in: 0..<restaurants.count)
+        let suggestedRestaurant = restaurants[randomNum]
+        
+        // create the user notification
+        let content = UNMutableNotificationContent()
+        content.title = "Restaurant Recommendation"
+        content.subtitle = "Try new food today"
+        // swiftlint:disable:next line_length
+        content.body = "I recommend you to check out \(suggestedRestaurant.name!). The restaurant is one of your favorites. It is located at \(suggestedRestaurant.location!). Would you like to give it a try?"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let request = UNNotificationRequest(identifier: "foodpin.restaurantSuggestion", content: content, trigger: trigger)
+        
+        // schedule the notification
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
     // MARK: - Override Functions
@@ -335,6 +361,8 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        prepareNotification()
+        
         //nav bar customization
         navigationController?.navigationBar.prefersLargeTitles = true
         // to make background transparent, set image and shadow to blank UIImage
@@ -369,7 +397,6 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
                 sectionNameKeyPath: nil,
                 cacheName: nil
             )
-            
             fetchResultController.delegate = self
             
             do {
@@ -400,4 +427,5 @@ NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
             registerForPreviewing(with: self as! UIViewControllerPreviewingDelegate, sourceView: view)
         }
     }
+    
 }

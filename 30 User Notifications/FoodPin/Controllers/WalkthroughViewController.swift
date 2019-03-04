@@ -74,8 +74,6 @@ WalkthroughPageViewControllerDelegate {
         }
     }
     
-    
-    
     func updateUI() {
         if let index = walkthroughPageViewController?.currentIndex {
             switch index {
