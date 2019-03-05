@@ -8,112 +8,119 @@
 
 import UIKit
 
+// MARK: - PROTOCOL
 protocol WalkthroughPageViewControllerDelegate: class {
-    func didUpdatePageIndex(currentIndex: Int)
+  func didUpdatePageIndex(currentIndex: Int)
 }
 
+// MARK: - CLASS
 class WalkthroughPageViewController: UIPageViewController, 
 UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    // MARK: - Variables
-    var pageHeadings = [
-        "Create your own food guide", 
-        "Show you the location", 
-        "Discover great restaurants"
-    ]
-    var pageImages = [
-        "onboarding-1", 
-        "onboarding-2", 
-        "onboarding-3"
-    ]
-    var pageSubHeadings = [
-        "Pin your favorite restaurants and create your own food guide", 
-        "Search and locate your favorite restaurant on Maps", 
-        "Find restaurants shared by your friends and other foodies"
-    ]
-    var currentIndex = 0
-    weak var walkthroughDelegate: WalkthroughPageViewControllerDelegate?
-    
-    // MARK: - functions
-    func pageViewController(
-        _ pageViewController: UIPageViewController, 
-        viewControllerBefore viewController: UIViewController) 
-        -> UIViewController? {
-            
-            // swiftlint:disable:next force_cast
-            var index = (viewController as! WalkthroughContentViewController).index
-            index -= 1
-            
-            return contentViewController(at: index)
+  // MARK: - Variables
+  var pageHeadings = [
+    "Create your own food guide", 
+    "Show you the location", 
+    "Discover great restaurants"
+  ]
+  var pageImages = [
+    "onboarding-1", 
+    "onboarding-2", 
+    "onboarding-3"
+  ]
+  var pageSubHeadings = [
+    "Pin your favorite restaurants and create your own food guide", 
+    "Search and locate your favorite restaurant on Maps", 
+    "Find restaurants shared by your friends and other foodies"
+  ]
+  var currentIndex = 0
+  weak var walkthroughDelegate: WalkthroughPageViewControllerDelegate?
+  
+  
+  // MARK: - functions
+  func pageViewController(
+    _ pageViewController: UIPageViewController, 
+    viewControllerBefore viewController: UIViewController) 
+    -> UIViewController? {
+      
+      // swiftlint:disable:next force_cast
+      var index = (viewController as! WalkthroughContentViewController).index
+      index -= 1
+      
+      return contentViewController(at: index)
+  }
+  
+  
+  func pageViewController(
+    _ pageViewController: UIPageViewController, 
+    viewControllerAfter viewController: UIViewController) 
+    -> UIViewController? {
+      
+      // swiftlint:disable:next force_cast
+      var index = (viewController as! WalkthroughContentViewController).index
+      index += 1
+      
+      return contentViewController(at: index)
+  }
+  
+  
+  func contentViewController(
+    at index: Int) 
+    -> WalkthroughContentViewController? {
+      
+      if index < 0 || index >= pageHeadings.count {
+        return nil
+      }
+      
+      // create a new view controller and pass data
+      let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+      if let pageContentViewController = storyboard.instantiateViewController(
+        withIdentifier: "WalkthroughContentViewController") as? WalkthroughContentViewController {
+        pageContentViewController.imageFile = pageImages[index]
+        pageContentViewController.heading = pageHeadings[index]
+        pageContentViewController.subHeading = pageSubHeadings[index]
+        pageContentViewController.index = index
+        return pageContentViewController
+      }
+      return nil
+  }
+  
+  
+  func forwardPage() {
+    currentIndex += 1
+    if let nextViewController = contentViewController(at: currentIndex) {
+      setViewControllers([nextViewController], direction: .forward, animated: true, completion: nil)
     }
+  }
+  
+  
+  func pageViewController(
+    _ pageViewController: UIPageViewController, 
+    didFinishAnimating finished: Bool, 
+    previousViewControllers: [UIViewController], 
+    transitionCompleted completed: Bool) {
     
-    func pageViewController(
-        _ pageViewController: UIPageViewController, 
-        viewControllerAfter viewController: UIViewController) 
-        -> UIViewController? {
-            
-            // swiftlint:disable:next force_cast
-            var index = (viewController as! WalkthroughContentViewController).index
-            index += 1
-            
-            return contentViewController(at: index)
-    }
-    
-    func contentViewController(
-        at index: Int) 
-        -> WalkthroughContentViewController? {
-            
-            if index < 0 || index >= pageHeadings.count {
-                return nil
-            }
-            
-            // create a new view controller and pass data
-            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-            if let pageContentViewController = storyboard.instantiateViewController(
-                withIdentifier: "WalkthroughContentViewController") as? WalkthroughContentViewController {
-                pageContentViewController.imageFile = pageImages[index]
-                pageContentViewController.heading = pageHeadings[index]
-                pageContentViewController.subHeading = pageSubHeadings[index]
-                pageContentViewController.index = index
-                return pageContentViewController
-            }
-            return nil
-    }
-    
-    func forwardPage() {
+    if completed {
+      if let contentViewController = pageViewController.viewControllers?.first as?
+        WalkthroughContentViewController {
+        currentIndex = contentViewController.index
         
-        currentIndex += 1
-        if let nextViewController = contentViewController(at: currentIndex) {
-            setViewControllers([nextViewController], direction: .forward, animated: true, completion: nil)
-        }
+        walkthroughDelegate?.didUpdatePageIndex(currentIndex: contentViewController.index)
+      }
     }
+  }
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    func pageViewController(
-        _ pageViewController: UIPageViewController, 
-        didFinishAnimating finished: Bool, 
-        previousViewControllers: [UIViewController], 
-        transitionCompleted completed: Bool) {
-        
-        if completed {
-            if let contentViewController = pageViewController.viewControllers?.first as?
-                WalkthroughContentViewController {
-                currentIndex = contentViewController.index
-                
-                walkthroughDelegate?.didUpdatePageIndex(currentIndex: contentViewController.index)
-            }
-        }
+    // set the data source to itself
+    dataSource = self
+    delegate = self
+    
+    // create the first walkthrough screen
+    if let startingViewController = contentViewController(at: 0) {
+      setViewControllers([startingViewController], direction: .forward, animated: true, completion: nil)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-          
-        // set the data source to itself
-        dataSource = self
-        delegate = self
-        
-        // create the first walkthrough screen
-        if let startingViewController = contentViewController(at: 0) {
-            setViewControllers([startingViewController], direction: .forward, animated: true, completion: nil)
-        }
-    }
-    
+  }
+  
 }

@@ -10,19 +10,20 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController {
-    var targetURL = ""
+  var targetURL = ""
+  
+  @IBOutlet var webView: WKWebView!
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    @IBOutlet var webView: WKWebView!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        navigationItem.largeTitleDisplayMode = .never
-        
-        if let url = URL(string: targetURL) {
-            let request = URLRequest(url: url)
-            webView.load(request)
-        }
+    navigationItem.largeTitleDisplayMode = .never
+    
+    if let url = URL(string: targetURL) {
+      let request = URLRequest(url: url)
+      webView.load(request)
     }
-    
+  }
+  
 }
